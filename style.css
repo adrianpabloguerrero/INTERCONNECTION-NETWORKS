@@ -1,0 +1,58 @@
+body {
+	background-color: #F7F7F7;
+}
+.header {
+  color: gray;
+  height: : 20%;
+  font-size: 60px;
+  font-family: 'Montserrat', sans-serif; position: relative; 
+  text-align:center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.image {
+	 width:100px;
+ 	 height:auto;
+ 	 vertical-align: middle;
+
+}
+
+.imputs{
+	font-family: 'Montserrat', sans-serif; position: relative;
+	font-size: 12px;
+	font-size-adjust: 0.5;
+	background-color: #c4c4c4;
+	height: 30px;
+	text-align:center;
+	display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px
+}
+
+.simu {
+	background-color:red;
+	height: 500px;
+	text-align:center;
+	display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+ margin: 10px 10px 10px 10px;
+}
+ 
+h2 {
+  
+}
+ 
+p {
+  color: rgb(32,32,32);
+  text-align: left;
+}
