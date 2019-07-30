@@ -15,11 +15,13 @@ body {
 }
 
 .image {
-	 width:100px;
- 	 height:auto;
- 	 vertical-align: middle;
+  width:100px;
+  height:auto;
+  vertical-align: middle;
 
 }
+
+
 
 .imputs{
 	font-family: 'Montserrat', sans-serif; position: relative;
@@ -45,13 +47,56 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
- margin: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
 }
- 
+
+.sistema {
+  background-color:grey;
+  margin: 30px 10px 10px 10px;
+}
+
+.procesador{
+ width: 50px; 
+ height: 50px; 
+ border: 3px solid #555;
+ background: #428bca;
+ margin: 30px 10px 10px 10px;
+ text-align:center;
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: space-around;
+ font-family: 'Montserrat', sans-serif; position: relative;
+ font-size: 5px;
+}
+
+
+.etapa {
+ width: 80%; 
+ height: 100%; 
+ border: 3px solid #555;
+ background: #428bca;
+ margin: 30px 10px 10px 10px;
+ text-align:center;
+ font-family: 'Montserrat', sans-serif; position: relative;
+ font-size: 5px;
+
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
 h2 {
-  
+
 }
- 
+
 p {
   color: rgb(32,32,32);
   text-align: left;
