@@ -4,34 +4,15 @@
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 	<script defer type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script defer type="application/javascript" src="procesador.js"></script>
+	<script defer type="application/javascript" src="etapa.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script defer type="application/javascript" src="Vue.js"></script>
+	
+
 </head>
 <body>
 	<div id="app">
-		<div class="header"> 
-			{{message}}
-			<img class="image" v-bind:src="image" /> 	
-		</div>
-		<div class="imputs">
-			<label for="nroproc">Numero de procesadores:</label>
-			<input type="number" v-model= "nroproc" placeholder="multiplo de 2" step="2" min="0" style="width:100px">
-			<label for="nroproc">Procesadores activos:</label>
-			<input type="number" v-model= "nroprocactivos" placeholder="multiplo de 2" step="2" min="0" style="width:100px">
-			<span>Periodicidad de los requerimientos</span>
-			<select v-model="periodicidad">
-				<option>Periodico</option>
-				<option>Unica vez</option>
-				<option>Al azar</option>
-			</select>
-
-			<span>Configuracion de direccion de memoria</span>
-			<select v-model="configuracion">
-				<option>Direccion unica</option>
-				<option>Direcciones al azar</option>
-				<option>Lista de direcciones</option>
-			</select>
-			<sistema></sistema>
-		</div>
 	</div>		
 </body>
 </html>
