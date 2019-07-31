@@ -12,8 +12,9 @@
      return dir;
    }
 
-
-
+   getId () {
+   	return this.id;
+   }
 
 };
 

@@ -1,8 +1,17 @@
+
 class Etapa {
 
-	constructor (id,crossbar){
+	constructor (id,nroEtapas){
 		this.id=id;
-		this.crossbar=crossbar;
+		this.crossbar = [];
+		this.cantidad = this.getCantidad(nroEtapas);
+		for (var i=0; i<this.cantidad;i++)
+			this.crossbar.push(new Crossbar(i));
+	}
+
+	getCantidad (nro){
+		var exponente = nro-1; 
+		return Math.pow(2,exponente); 
 	}
 
 	getId () {

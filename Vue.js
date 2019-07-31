@@ -6,13 +6,21 @@ Vue.component ('procesador', {
   template: '<div class="procesador"> {{"Procesador " + procesador.getDireccion() }} </div>'
 });
 
+Vue.component ('crossbar', {
+  props: ['crossbar'],
+  data: function() {
+    return{
+    }},
+    template: '<div class="crossbar">  </div>'
+})
+
 
 Vue.component ('etapa', {
   props: ['etapa'],
   data: function() {
     return{
     }},
-    template: '<div class="etapa"> {{"Etapa" + etapa.getId() }} </div>'
+    template: '<div class="etapa"> <crossbar v-for="co in etapa.crossbar" v-bind:crossbar=co> </crossbar> </div>'
 })
 
 var app = new Vue({
@@ -26,16 +34,17 @@ var app = new Vue({
     configuracion: '',
     procesadores: [],
     etapas: [],
+   
   },
 
    watch: {
     nroproc: function(){
       this.procesadores=[];
       this.etapas=[];
-      for (i = 0; i < this.nroproc; i++)
+      for (var i = 0; i < this.nroproc; i++)
         this.procesadores.push(new Procesador(i,this.nroEtapas));
-      for (i = 0; i < this.nroEtapas; i++)
-        this.etapas.push(new Etapa(i));
+      for (var i = 0; i < this.nroEtapas; i++)
+        this.etapas.push(new Etapa(i,this.nroEtapas));
     },
 
    },
