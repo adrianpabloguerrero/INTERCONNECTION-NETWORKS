@@ -10,6 +10,7 @@ class Etapa {
 	}
 
 	getCantidad (nro){
+		console.log (nro);
 		var exponente = nro-1; 
 		return Math.pow(2,exponente); 
 	}
@@ -17,4 +18,8 @@ class Etapa {
 	getId () {
 		return this.id;
 	}
+
+	
+
+
 }
