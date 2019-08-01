@@ -14,13 +14,29 @@ Vue.component ('crossbar', {
     template: '<div class="crossbar">  </div>'
 })
 
+Vue.component ('slotMemoria', {
+props: ['slotMemoria'],
+data: function(){
+  return{
+}},
+  template: '<div class="slotMemoria">{{slotMemoria.getId()}}</div>'
+})
+
+Vue.component ('memoria', {
+props: ['memoria'],
+data: function(){
+  return{
+}},
+  template: '<div class="memoria"> <div class="col-12"> Memoria  </div> <slotMemoria v-for="so in memoria.slots" v-bind:slotMemoria=so> </slotMemoria> </div>'
+})
+
 
 Vue.component ('etapa', {
   props: ['etapa'],
   data: function() {
     return{
     }},
-    template: '<div class="etapa"> <crossbar v-for="co in etapa.crossbar" v-bind:crossbar=co> </crossbar> </div>'
+    template: '<div class="row" style="height:100%;"> <div class="col-8 my-col etapa"> {{"Etapa " + etapa.getId()}} </div> <div class="list-cross col-4 my-col"> <crossbar v-for="co in etapa.crossbar" v-bind:crossbar=co> </crossbar> </div> </div>'
 })
 
 var app = new Vue({
@@ -34,24 +50,28 @@ var app = new Vue({
     configuracion: '',
     procesadores: [],
     etapas: [],
-   
+    memoria: null,
+
   },
 
    watch: {
     nroproc: function(){
       this.procesadores=[];
       this.etapas=[];
+      this.memoria=null;
+      if (this.nroproc>0){
       for (var i = 0; i < this.nroproc; i++)
         this.procesadores.push(new Procesador(i,this.nroEtapas));
       for (var i = 0; i < this.nroEtapas; i++)
         this.etapas.push(new Etapa(i,this.nroEtapas));
-    },
-
-   },
+      this.memoria = new Memoria(this.nroEtapas);
+      }
+    }
+},
   
   computed: {
     nroEtapas: function (){
-      return Math.log(this.nroproc)/Math.log(2) ;
+      return Math.ceil(Math.log(this.nroproc)/Math.log(2)) ;
     }
   },
 
@@ -92,13 +112,16 @@ var app = new Vue({
     
     <div class="container">
       <div class="row display-flex">
-        <div class="col my-col">      
+        <div class="my-col">      
           <procesador v-for= "po in procesadores" v-bind:procesador=po> 
           </procesador>
         </div>
         <div v-for= "eo in etapas" class="col my-col">
           <etapa v-bind:etapa=eo>
           </etapa>
+        </div>
+        <div class="col my-col">
+        <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
         </div>
       </div>
     </div>
