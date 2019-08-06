@@ -72,7 +72,7 @@ body {
 
 
 .etapa {
-  width: 80%; 
+  width: 100%; 
   height: 100%; 
   border: 3px solid #555;
   text-align:center;
@@ -107,16 +107,13 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
-.row.display-flex > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .crossbar {
   width: 50px; 
   height: 50px; 
   background: #fff176;
-  margin: 30px 10px 10px 10px;
+  padding: : 30px 10px 10px 10px;
 }
 
 
@@ -134,7 +131,6 @@ body {
   align-items: center;
   justify-content: space-around;
  
- 
 }
 
 .list-cross {
@@ -142,7 +138,58 @@ body {
   justify-content: space-around;
   align-content: center;
   flex-direction: column;
+  align-items: center;
 }
+
+.list-puertos {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
+
+.puerto {
+  width: 100%px; 
+  height: 10px; 
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+}
+
+.columnL {
+  float: left;
+  width: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+}
+
+.columnC {
+  float: right;
+  width: 90%;
+} 
+
+.columnR {
+  float: right;
+  align-items: right;
+  align-content: right;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+  width: 5%;
+}
+
+/* Clear floats after the columns */
 
 h2 {
 
