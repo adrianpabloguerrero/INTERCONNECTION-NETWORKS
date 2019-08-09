@@ -9,8 +9,8 @@ class Crossbar {
 		this.entradas=[];
 		this.salidas=[];
 		for (var i = 0; i< 2; i ++) {
-			this.entradas.push(new Puerto(this.getId() + "e" + i.toString(2)));
-			this.salidas.push(new Puerto(this.getId() + "s" + i.toString(2)));
+			this.entradas.push(new Puerto(this.getId() + "ec" + i.toString(2)));
+			this.salidas.push(new Puerto(this.getId() + "sc" + i.toString(2)));
 		}
 
 	}

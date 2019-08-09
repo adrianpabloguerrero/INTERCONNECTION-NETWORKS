@@ -9,4 +9,9 @@ class Puerto {
 		return this.id;
 	}
 
+	getIdBinario (separador){
+		this.var = this.id.split(separador);
+		return this.var[1];
+	}
+
 }

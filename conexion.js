@@ -1,6 +1,6 @@
 class Conexion {
 
-  constructor (puertoEntrada, puertoSalida){
+  constructor (puertoEntrada,puertoSalida){
     this.puertoEntrada=puertoEntrada;
     this.puertoSalida=puertoSalida;
   }
@@ -20,10 +20,11 @@ class Conexion {
   };
 }
 	
-  connectDivs(leftId, rightId, color, tension) {
-  var left = document.getElementById(leftId);
-  var right = document.getElementById(rightId);
-	
+  connectDivs(color, tension) {
+  var left = document.getElementById(this.puertoEntrada.getId());
+  console.log ("valor  " + this.puertoEntrada.getId());
+  var right = document.getElementById(this.puertoSalida.getId());
+
   var leftPos = this.findAbsolutePosition(left);
   var x1 = leftPos.x;
   var y1 = leftPos.y;
@@ -89,6 +90,15 @@ class Conexion {
   }
   return svg;
 }
+
+getEntrada (){
+  return this.puertoEntrada;
+}
+
+getSalida (){
+  return this.puertoSalida;
+}
+
 
 
 }
