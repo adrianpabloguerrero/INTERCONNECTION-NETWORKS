@@ -3,6 +3,7 @@
 	constructor (id,espacioDeDirecciones){
 		this.id=id;
 		this.espacioDeDirecciones = espacioDeDirecciones;
+    this.puerto = new Puerto(this.getId() + "p");
 	}
 
 	getDireccion  ()   {
@@ -14,6 +15,10 @@
 
    getId () {
    	return this.id;
+   }
+
+   getPuerto () {
+    return this.puerto;
    }
 
   
