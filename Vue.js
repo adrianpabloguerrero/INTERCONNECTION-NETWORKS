@@ -1,11 +1,3 @@
-      Vue.component ('procesador', {
-       props: ['procesador'],
-       data: function() {
-        return {
-        }},
-        template: '<div :id="procesador.getDireccion()" class="procesador"> {{"Procesador " + procesador.getDireccion() }} </div>'
-      });
-
       Vue.component ('crossbar', {
         props: ['crossbar'],
         data: function() {
@@ -13,11 +5,11 @@
           }},
           template: `<div class="row crossbar"> 
           <div class="col-1 list-puertos nopadding"> 
-          <puerto  v-for="po in crossbar.entradas" v-bind:puerto=po>     </puerto>          
+          <puerto  v-for="(po,index) in crossbar.entradas" v-bind:puerto=po v-bind:key="index">     </puerto>          
           </div>
           <div class="col-10  nopadding"> </div>
           <div class="col-1 list-puertos nopadding"> 
-          <puerto  v-for="po in crossbar.salidas" v-bind:puerto=po>    </puerto>           
+          <puerto  v-for="(po,index) in crossbar.salidas" v-bind:puerto=po v-bind:key="index">    </puerto>           
           </div>
           </div>`
         })
@@ -29,12 +21,30 @@
           }},
           template: '<div> </div>'
         })
+
+         Vue.component ('procesador', {
+       props: ['procesador'],
+       data: function() {
+        return {
+        }},
+        template: `<div :id="procesador.getDireccion()" class="procesador"> 
+                        <div> {{"Procesador " + procesador.getDireccion() }} </div>  
+                        <div class="myrow">
+                           <div class="col-11 nopadding"> </div>
+                           <div class="col-1 list-puertos nopadding">  <puerto v-bind:puerto=procesador.puerto> </puerto>  </div>
+                        </div> 
+                  </div>`
+      });
+
       Vue.component ('slotMemoria', {
         props: ['slotMemoria'],
         data: function(){
           return{
           }},
-          template: '<div class="slotMemoria">{{slotMemoria.getId()}}</div>'
+          template: `<div class="row slotMemoria"> 
+                        <div class="col-1 list-puertos nopadding"> <puerto v-bind:puerto=slotMemoria.puerto> </puerto></div>
+                        <div class="col-11  nopadding"> {{slotMemoria.getId()}}  </div> 
+                     </div>`
         })
 
       Vue.component ('memoria', {
@@ -42,7 +52,7 @@
         data: function(){
           return{
           }},
-          template: '<div class="memoria"> <div class="col-12"> Memoria  </div> <slotMemoria v-for="so in memoria.slots" v-bind:slotMemoria=so> </slotMemoria> </div>'
+          template: '<div class="memoria"> <div class="col-12"> Memoria  </div> <slotMemoria v-for="(so,index) in memoria.slots" v-bind:slotMemoria=so v-bind:key="index"> </slotMemoria> </div>'
         })
 
 
@@ -54,12 +64,9 @@
           }},
 
           mounted: function () {
-            this.$nextTick(function () {
-             console.log ("fuera for");
-            
+            this.$nextTick(function () {  
               for (var i = 0; i < Object.keys(this.etapa.conexiones).length ; i++){
                 this.etapa.conexiones[i].connectDivs("red",0);
-                console.log ("dentro for");
               }
             })
           },
@@ -68,20 +75,20 @@
           <div class="col-8   etapa"> {{"Etapa " + etapa.getId()}} 
           <div class="row" style="height:100%;"> 
           <div class="col-1 list-puertos nopadding"> 
-          <puerto  v-for="po in etapa.entradas" v-bind:puerto=po>  </puerto> 
+          <puerto  v-for="(po,index) in etapa.entradas" v-bind:puerto=po v-bind:key="index">  </puerto> 
           </div>
           <div class="col-10  nopadding">               
           </div>
           <div class="col-1 list-puertos nopadding"> 
-          <puerto  v-for="po in etapa.salidas" v-bind:puerto=po>  </puerto>            
+          <puerto  v-for="(po,index) in etapa.salidas" v-bind:puerto=po v-bind:key="index">  </puerto>            
           </div>
 
           </div>
           </div>
           <div class="col-4 list-cross"> 
-          <crossbar v-for="co in etapa.crossbar" v-bind:crossbar=co> </crossbar> 
+          <crossbar v-for="(co,index) in etapa.crossbar" v-bind:crossbar=co v-bind:key="index"> </crossbar> 
           </div> 
-          <conexion v-for="con in etapa.conexiones" v-bind:conexion=con> </conexion>
+          <conexion v-for="(con,index) in etapa.conexiones" v-bind:conexion=con v-bind:key="index"> </conexion>
           </div>`
         })
 
@@ -109,6 +116,7 @@
           memoria: null,
           conexiones:null,
           perfectShuffle:null,
+          butterFlyZero:null,
         },
 
         watch: {
@@ -120,9 +128,14 @@
             if (this.nroproc>0){
               for (var i = 0; i < this.nroproc; i++)
                 this.procesadores.push(new Procesador(i,this.nroEtapas));
-              for (var i = 0; i < this.nroEtapas; i++)
-                this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));  
+              for (var i = 0; i < this.nroEtapas; i++){
+                if (i!=this.nroEtapas-1)
+                  this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
+                else 
+                  this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(2)));
+              }
               this.memoria = new Memoria(this.nroEtapas);
+
             //this.perfectShuffle = new PerfectShuffle(2);
             //console.log(this.perfectShuffle.calcular("10",this.nroproc));
 
@@ -181,11 +194,11 @@
           <div class="container">
           <div class="row display-flex">
           <div class="my-col">      
-          <procesador v-for= "po in procesadores" v-bind:procesador=po> 
+          <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> 
           </procesador>
           </div>
-          <div v-for= "eo in etapas" class="col my-col">
-          <etapa v-bind:etapa=eo>
+          <div v-for= "(eo,index) in etapas" class="col my-col">
+          <etapa v-bind:etapa=eo v-bind:key="index">
           </etapa>
           </div>
           <div class="col my-col">

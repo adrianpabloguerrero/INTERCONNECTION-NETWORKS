@@ -22,7 +22,6 @@ class Conexion {
 	
   connectDivs(color, tension) {
   var left = document.getElementById(this.puertoEntrada.getId());
-  console.log ("valor  " + this.puertoEntrada.getId());
   var right = document.getElementById(this.puertoSalida.getId());
 
   var leftPos = this.findAbsolutePosition(left);

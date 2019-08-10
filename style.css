@@ -62,9 +62,7 @@ body {
   margin: 30px 10px 10px 10px;
   text-align:center;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-around;
   font-family: 'Montserrat', sans-serif; position: relative;
   font-size: 5px;
@@ -99,6 +97,11 @@ body {
   justify-content: space-around;
 }
 
+.myrow{ 
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .col.my-col {
   padding: 20px 20px 20px 20px;
 }
@@ -120,7 +123,7 @@ body {
 .slotMemoria {
   width: 80%; 
   height: 30px; 
-  background: black;
+  background: #E1E1E1;
   text-align:center;
   color:white;
   font-family: 'Montserrat', sans-serif; position: relative;
