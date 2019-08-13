@@ -21,60 +21,60 @@
         data: function(){
           return{
             elemOrigen: null,
-            elemDestino: null
+            elemDestino: null,
+            origen: null,
+            destino: null,
+            description: null
           }},
 
+
           created() {
+            window.addEventListener('resize',this.cambioTamano);
+            this.cambioTamano();
             this.$eventBus.$on('send-data', (data) => {
-               console.log (data);
                this.prepare();
             })},
-          computed: {
-            test: function() {
-              return this.elemDestino.offsetTop;
-            },
-            origen: function() {
-              console.log("me calcule destino");
-              if (this.elemOrigen==null)
-                return " ";
-              return (this.elemOrigen.getBoundingClientRect().left - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
-            },
-            destino: function() {
-              console.log("me calcule destino");
-              if (this.elemDestino==null)
-                return " ";
-              return (this.elemDestino.getBoundingClientRect().left - this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
-            },
-            description: function() {
-              return " M " + this.origen + " L " + this.destino;
-            }
-          },
 
-          watch: {
-            test: function () {
-              console.log("viru tonto");
-            }
+            destroyed() {
+            window.removeEventListener('resize',this.cambioTamano);
           },
+          
+        
+
           methods: {
+
+            calcularDescription (){
+              this.description= " M " + this.origen + " L " + this.destino;
+            },
+            calcularOrigen(){
+              if (this.elemOrigen==null)
+                this.origen= " ";
+              else
+              this.origen= (this.elemOrigen.getBoundingClientRect().left - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+            },
+
+            calcularDestino(){
+               if (this.elemDestino==null)
+                this.destino = " ";
+              else
+              this.destino = (this.elemDestino.getBoundingClientRect().left - this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+            },
+
+
+
+            cambioTamano(){
+             this.calcularOrigen();
+              this.calcularDestino();
+              this.calcularDescription();
+            },
             prepare: function() {
               this.elemOrigen = document.getElementById(this.conexion.getEntrada().getId());
               this.elemDestino = document.getElementById(this.conexion.getSalida().getId());
-              var mutationObserver = new MutationObserver(function(mutations) {
-                  mutations.forEach(function(mutation) {
-                      console.log("adri gay");
-                  });
-              });
-              mutationObserver.observe(this.elemDestino, {
-                attributes: true,
-                characterData: true,
-                childList: true,
-                subtree: true,
-                attributeOldValue: true,
-                characterDataOldValue: true
-              });
-            }
-          },
-          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><path v-if="elemOrigen!=null" :d="description" stroke="red"> </path></svg>'
+              this.calcularOrigen();
+              this.calcularDestino();
+              this.calcularDescription();
+          }},
+          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path></svg>'
         })
 
          Vue.component ('procesador', {
@@ -120,10 +120,7 @@
 
           mounted: function () {
             this.$nextTick(function () {  
-              for (var i = 0; i < Object.keys(this.etapa.conexiones).length ; i++){
-                this.$eventBus.$emit('send-data', "Soy un dato");
-                 console.log("emitiendo");
-              }
+                this.$eventBus.$emit('send-data', "montado");
             })
           },
 
@@ -175,6 +172,10 @@
           butterFlyZero:null,
         },
 
+
+
+          
+          
         watch: {
           nroproc: function(){
             this.procesadores=[];
@@ -215,6 +216,7 @@
           },
 
           methods: {
+           
             multiplicar(){
               this.contador = this.retornar(this.contador);  
             },
