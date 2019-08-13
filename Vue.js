@@ -1,3 +1,5 @@
+    Vue.prototype.$eventBus = new Vue();
+
       Vue.component ('crossbar', {
         props: ['crossbar'],
         data: function() {
@@ -18,8 +20,61 @@
         props:['conexion'],
         data: function(){
           return{
+            elemOrigen: null,
+            elemDestino: null,
+            origen: null,
+            destino: null,
+            description: null
           }},
-          template: '<div> </div>'
+
+
+          created() {
+            window.addEventListener('resize',this.cambioTamano);
+            this.cambioTamano();
+            this.$eventBus.$on('send-data', (data) => {
+               this.prepare();
+            })},
+
+            destroyed() {
+            window.removeEventListener('resize',this.cambioTamano);
+          },
+          
+        
+
+          methods: {
+
+            calcularDescription (){
+              this.description= " M " + this.origen + " L " + this.destino;
+            },
+            calcularOrigen(){
+              if (this.elemOrigen==null)
+                this.origen= " ";
+              else
+              this.origen= (this.elemOrigen.getBoundingClientRect().left - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+            },
+
+            calcularDestino(){
+               if (this.elemDestino==null)
+                this.destino = " ";
+              else
+              this.destino = (this.elemDestino.getBoundingClientRect().left - this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+            },
+
+
+
+            cambioTamano(){
+             this.calcularOrigen();
+              this.calcularDestino();
+              this.calcularDescription();
+            },
+            prepare: function() {
+              this.elemOrigen = document.getElementById(this.conexion.getEntrada().getId());
+              this.elemDestino = document.getElementById(this.conexion.getSalida().getId());
+              this.calcularOrigen();
+              this.calcularDestino();
+              this.calcularDescription();
+          }},
+          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path></svg>'
         })
 
          Vue.component ('procesador', {
@@ -65,9 +120,7 @@
 
           mounted: function () {
             this.$nextTick(function () {  
-              for (var i = 0; i < Object.keys(this.etapa.conexiones).length ; i++){
-                this.etapa.conexiones[i].connectDivs("red",0);
-              }
+                this.$eventBus.$emit('send-data', "montado");
             })
           },
 
@@ -101,7 +154,7 @@
           template: '<div :id="puerto.getId()" class="puerto"> </div>'
         })
 
-
+ 
       var app = new Vue({
         el: '#app',
         data: {
@@ -119,6 +172,10 @@
           butterFlyZero:null,
         },
 
+
+
+          
+          
         watch: {
           nroproc: function(){
             this.procesadores=[];
@@ -149,6 +206,8 @@
           },
 
 
+      
+
 
           computed: {
             nroEtapas: function (){
@@ -157,6 +216,7 @@
           },
 
           methods: {
+           
             multiplicar(){
               this.contador = this.retornar(this.contador);  
             },
@@ -166,7 +226,7 @@
           },
 
           template: `
-          <div> 
+          <div>
           <div class="header"> 
           {{message}}
           <img class="image" v-bind:src="image" />  
@@ -190,21 +250,22 @@
           <option>Lista de direcciones</option>
           </select>
           </div>
-          
+                    
           <div class="container">
-          <div class="row display-flex">
-          <div class="my-col">      
-          <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> 
-          </procesador>
-          </div>
-          <div v-for= "(eo,index) in etapas" class="col my-col">
-          <etapa v-bind:etapa=eo v-bind:key="index">
-          </etapa>
-          </div>
-          <div class="col my-col">
-          <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
-          </div>
-          </div>
+         
+            <div class="row display-flex">
+            <div class="my-col">      
+            <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> 
+            </procesador>
+            </div>
+            <div v-for= "(eo,index) in etapas" class="col my-col">
+            <etapa v-bind:etapa=eo v-bind:key="index">
+            </etapa>
+            </div>
+            <div class="col my-col">
+            <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
+            </div>
+            </div>
           </div>
 
           </div>`
