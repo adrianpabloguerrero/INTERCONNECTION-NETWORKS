@@ -50,23 +50,22 @@
               if (this.elemOrigen==null)
                 this.origen= " ";
               else
-              this.origen= (this.elemOrigen.getBoundingClientRect().left - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+              this.origen= (this.elemOrigen.getBoundingClientRect().left + ((this.elemOrigen.getBoundingClientRect().width)/2) - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top + ((this.elemOrigen.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
             },
 
             calcularDestino(){
                if (this.elemDestino==null)
                 this.destino = " ";
               else
-              this.destino = (this.elemDestino.getBoundingClientRect().left - this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top - this.$el.getBoundingClientRect().top);
+              this.destino = (this.elemDestino.getBoundingClientRect().left + ((this.elemDestino.getBoundingClientRect().width)/2)- this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top + ((this.elemDestino.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
             },
 
-
-
             cambioTamano(){
-             this.calcularOrigen();
+              this.calcularOrigen();
               this.calcularDestino();
               this.calcularDescription();
             },
+
             prepare: function() {
               this.elemOrigen = document.getElementById(this.conexion.getEntrada().getId());
               this.elemDestino = document.getElementById(this.conexion.getSalida().getId());
