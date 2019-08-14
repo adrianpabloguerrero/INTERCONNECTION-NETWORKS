@@ -87,7 +87,7 @@
               this.calcularDestino();
               this.calcularDescription();
           }},
-          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><circle :cx="this.origenCirculoX" :cy="this.origenCirculoY" r="3" fill="red"/><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path><circle :cx="this.destinoCirculoX" :cy="this.destinoCirculoY" r="3"  fill="red" /></svg>'
+          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%" viewbox="0 0 100 100"><circle :cx="this.origenCirculoX" :cy="this.origenCirculoY" r="3" fill="red"/><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path><circle :cx="this.destinoCirculoX" :cy="this.destinoCirculoY" r="3"  fill="red" /></svg>'
         })
 
          Vue.component ('procesador', {
@@ -95,6 +95,8 @@
        data: function() {
         return {
         }},
+
+          
         template: `<div :id="procesador.getDireccion()" class="procesador"> 
                         <div> {{"Procesador " + procesador.getDireccion() }} </div>  
                         <div class="myrow">
@@ -194,8 +196,9 @@
             this.procesadores=[];
             this.etapas=[];
             this.memoria=null;
-            this.conexiones=[];
+            this.conexiones=null;
             if (this.nroproc>0){
+              this.conexiones = [];
               for (var i = 0; i < this.nroproc; i++)
                 this.procesadores.push(new Procesador(i,this.nroEtapas));
               for (var i = 0; i < this.nroEtapas; i++){
@@ -205,10 +208,7 @@
                   this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(2)));
               }
               this.memoria = new Memoria(this.nroEtapas);
-
-            //this.perfectShuffle = new PerfectShuffle(2);
-            //console.log(this.perfectShuffle.calcular("10",this.nroproc));
-
+                this.crearConexionesExternas();
           }
         }
       },
@@ -216,6 +216,8 @@
       updated: function(){
             //console.log("moooooun");
             //this.conexiones.connectDivs(this.procesadores[0].getDireccion().toString(),this.procesadores[1].getDireccion().toString(),"red",0);
+         
+
           },
 
 
@@ -230,6 +232,15 @@
 
           methods: {
            
+            crearConexionesExternas (){
+              //conexiones logicas entre puerto de procesador y primer puerto de entrada
+              for (var i = 0; i<this.nroproc; i++){
+                this.conexiones.push(new Conexion (this.procesadores[i].getPuerto(),this.etapas[0].getEntradas()[i]));
+             
+              }
+
+            },
+
             multiplicar(){
               this.contador = this.retornar(this.contador);  
             },
@@ -240,48 +251,46 @@
 
           template: `
           <div>
-          <div class="header"> 
-          {{message}}
-          <img class="image" v-bind:src="image" />  
-          </div>
+            <div class="header"> 
+            {{message}}
+            <img class="image" v-bind:src="image" />  
+            </div>
           <div class="imputs">
-          <label for="nroproc">Numero de procesadores:</label>
-          <input type="number" v-model= "nroproc" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
-          <label for="nroproc">Procesadores activos:</label>
-          <input type="number" v-model= "nroprocactivos" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
-          <span>Periodicidad de los requerimientos</span>
-          <select v-model="periodicidad">
-          <option>Periodico</option>
-          <option>Unica vez</option>
-          <option>Al azar</option>
-          </select>
-
-          <span>Configuracion de direccion de memoria</span>
-          <select v-model="configuracion">
-          <option>Direccion unica</option>
-          <option>Direcciones al azar</option>
-          <option>Lista de direcciones</option>
-          </select>
-          </div>
-                    
+            <label for="nroproc">Numero de procesadores:</label>
+            <input type="number" v-model= "nroproc" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
+            <label for="nroproc">Procesadores activos:</label>
+            <input type="number" v-model= "nroprocactivos" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
+            <span>Periodicidad de los requerimientos</span>
+            <select v-model="periodicidad">
+            <option>Periodico</option>
+            <option>Unica vez</option>
+            <option>Al azar</option>
+            </select>
+            <span>Configuracion de direccion de memoria</span>
+            <select v-model="configuracion">
+            <option>Direccion unica</option>
+            <option>Direcciones al azar</option>
+            <option>Lista de direcciones</option>
+            </select>
+          </div>          
           <div class="container">
-         
-            <div class="row display-flex">
-            <div class="my-col">      
-            <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> 
-            </procesador>
+            <div class="row">
+              <div class="my-col">      
+                <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </procesador>
+              </div>
+              <div v-for= "(eo,index) in etapas" class="col my-col">
+                <etapa v-bind:etapa=eo v-bind:key="index"> </etapa>
+              </div>
+              <div class="col my-col">
+                <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
+              </div>
+              <conexion v-if="procesadores!==null" v-for="(co,index) in conexiones" v-bind:conexion=co v-bind:key="index"> </conexion>
             </div>
-            <div v-for= "(eo,index) in etapas" class="col my-col">
-            <etapa v-bind:etapa=eo v-bind:key="index">
-            </etapa>
-            </div>
-            <div class="col my-col">
-            <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
-            </div>
-            </div>
+            
+            <div>  
+            </div>  
           </div>
-
-          </div>`
+        </div>`
 
         });
 
