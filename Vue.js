@@ -24,6 +24,10 @@
             elemDestino: null,
             origen: null,
             destino: null,
+            origenCirculoX: null,
+            origenCirculoY: null,
+            destinoCirculoX: null,
+            destinoCirculoY: null,
             description: null
           }},
 
@@ -47,18 +51,28 @@
               this.description= " M " + this.origen + " L " + this.destino;
             },
             calcularOrigen(){
-              if (this.elemOrigen==null)
+              if (this.elemOrigen==null){
                 this.origen= " ";
-              else
+                this.origenCirculoX= 0;
+                this.origenCirculoY= 0;
+              }
+              else{
               this.origen= (this.elemOrigen.getBoundingClientRect().left + ((this.elemOrigen.getBoundingClientRect().width)/2) - this.$el.getBoundingClientRect().left) + " " + (this.elemOrigen.getBoundingClientRect().top + ((this.elemOrigen.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
-            },
+              this.origenCirculoX = (this.elemOrigen.getBoundingClientRect().left + ((this.elemOrigen.getBoundingClientRect().width)/2) - this.$el.getBoundingClientRect().left);
+              this.origenCirculoY = (this.elemOrigen.getBoundingClientRect().top + ((this.elemOrigen.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
+            }},
 
             calcularDestino(){
-               if (this.elemDestino==null)
+               if (this.elemDestino==null){
                 this.destino = " ";
-              else
+                this.destinoCirculoX= 0;
+                this.destinoCirculoY= 0;
+              }
+              else{
               this.destino = (this.elemDestino.getBoundingClientRect().left + ((this.elemDestino.getBoundingClientRect().width)/2)- this.$el.getBoundingClientRect().left)+ " " + (this.elemDestino.getBoundingClientRect().top + ((this.elemDestino.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
-            },
+              this.destinoCirculoX = (this.elemDestino.getBoundingClientRect().left + ((this.elemDestino.getBoundingClientRect().width)/2)- this.$el.getBoundingClientRect().left);
+              this.destinoCirculoY = (this.elemDestino.getBoundingClientRect().top + ((this.elemDestino.getBoundingClientRect().height)/2) - this.$el.getBoundingClientRect().top);
+            }},
 
             cambioTamano(){
               this.calcularOrigen();
@@ -73,7 +87,7 @@
               this.calcularDestino();
               this.calcularDescription();
           }},
-          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path></svg>'
+          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%"><circle :cx="this.origenCirculoX" :cy="this.origenCirculoY" r="3" fill="red"/><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path><circle :cx="this.destinoCirculoX" :cy="this.destinoCirculoY" r="3"  fill="red" /></svg>'
         })
 
          Vue.component ('procesador', {
@@ -106,7 +120,7 @@
         data: function(){
           return{
           }},
-          template: '<div class="memoria"> <div class="col-12"> Memoria  </div> <slotMemoria v-for="(so,index) in memoria.slots" v-bind:slotMemoria=so v-bind:key="index"> </slotMemoria> </div>'
+          template: '<div class="memoria"> <slotMemoria v-for="(so,index) in memoria.slots" v-bind:slotMemoria=so v-bind:key="index"> </slotMemoria> </div>'
         })
 
 
