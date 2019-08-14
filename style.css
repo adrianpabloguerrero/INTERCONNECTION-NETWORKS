@@ -68,6 +68,14 @@ body {
   font-size: 5px;
 }
 
+.crossbar {
+  width: 50px; 
+  height: 50px; 
+  max-width: 100%;
+  background: #fff176;
+  padding: : 30px 10px 10px 10px;
+}
+
 
 .etapa {
   width: 100%; 
@@ -83,7 +91,7 @@ body {
 }
 
 .memoria {
-  width: 80%; 
+  width: 100%; 
   height: 100%; 
   border: 3px solid #555;
   text-align:center;
@@ -91,7 +99,7 @@ body {
   font-size: 5px;
   background-color: red;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
@@ -112,16 +120,11 @@ body {
 }
 
 
-.crossbar {
-  width: 50px; 
-  height: 50px; 
-  background: #fff176;
-  padding: : 30px 10px 10px 10px;
-}
 
 
 .slotMemoria {
-  width: 80%; 
+  width: 80%;
+   max-width: 80%; 
   height: 30px; 
   background: #E1E1E1;
   text-align:center;
@@ -142,6 +145,7 @@ body {
   align-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 }
 
 .list-puertos {
@@ -191,7 +195,11 @@ body {
   flex-direction: column;
   width: 5%;
 }
-
+.container {
+  background-repeat: no-repeat;
+  height: 100%;
+  position:relative;
+}
 /* Clear floats after the columns */
 
 h2 {
