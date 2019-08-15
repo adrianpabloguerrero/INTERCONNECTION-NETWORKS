@@ -97,7 +97,7 @@ body {
   text-align:center;
   font-family: 'Montserrat', sans-serif;
   font-size: 5px;
-  background-color: red;
+  background-color: white;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -124,7 +124,7 @@ body {
 
 .slotMemoria {
   width: 80%;
-   max-width: 80%; 
+  max-width: 80%; 
   height: 30px; 
   background: #E1E1E1;
   text-align:center;

@@ -12,13 +12,21 @@ class Crossbar {
 			this.entradas.push(new Puerto(this.getId() + "ec" + i.toString(2)));
 			this.salidas.push(new Puerto(this.getId() + "sc" + i.toString(2)));
 		}
-
 	}
 
 	getOcupado  ()   {
      return (this.entrada1||this.entrada2||this.salida1||this.salida2);
    }
 
+   getEntradas(){
+   	return this.entradas;
+   }
+
+   getSalidas(){
+   	return this.salidas;
+   }
+
+   
    getId(){
    	return this.id;
    }

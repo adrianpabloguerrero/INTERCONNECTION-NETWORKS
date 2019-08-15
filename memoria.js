@@ -7,6 +7,10 @@ class Memoria {
 
 	}
 
+	getSlots(){
+		return this.slots;
+	}
+
 	
 
 

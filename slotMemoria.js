@@ -13,4 +13,7 @@
      return dir;
    }
 
+   getPuerto(){
+    return this.puerto;
+   }
 };
