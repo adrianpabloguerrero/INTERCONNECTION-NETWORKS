@@ -237,15 +237,14 @@
                 //conexiones logicas entre puerto de procesador y primer puerto de entrada
                 this.conexiones.push(new Conexion (this.procesadores[i].getPuerto(),this.etapas[0].getEntradas()[i]));
               }
+
              var k=0;
               for (var i = 0; i<this.nroproc/2; i++){
                 for (var j=0; j<=1; j++){
-                  this.conexiones.push(new Conexion (this.etapas[2].getCrossbars()[i].getSalidas()[j],this.memoria.getSlots()[k].getPuerto()));
+                  this.conexiones.push(new Conexion (this.etapas[this.nroEtapas-1].getCrossbars()[i].getSalidas()[j],this.memoria.getSlots()[k].getPuerto()));
                   k++;
                 }
               }
-
-
 
 
             },
