@@ -1,3 +1,4 @@
+    //comentarioCristian
     Vue.prototype.$eventBus = new Vue();
 
       Vue.component ('crossbar', {
