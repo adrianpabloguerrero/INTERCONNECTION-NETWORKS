@@ -239,6 +239,7 @@
                 this.conexiones.push(new Conexion (this.procesadores[i].getPuerto(),this.etapas[0].getEntradas()[i]));
               }
 
+              //conexiones entre ultimo crossbar y slotsMemoria
              var k=0;
               for (var i = 0; i<this.nroproc/2; i++){
                 for (var j=0; j<=1; j++){
@@ -246,6 +247,16 @@
                   k++;
                 }
               }
+
+              //conexiones entre salida etapa y crossbar
+              for (var i=0; i<this.nroEtapas;i++)
+                for (var j=0; j<this.nroproc;j++)
+                    this.conexiones.push(new Conexion (this.etapas[i].getSalidas()[j],this.etapas[i].getCrossbars()[Math.trunc(j/2)].getEntradas()[j%2]));
+              
+              //conexiones entre salida de crossbar y proxima etapa
+              for (var i=0; i<this.nroEtapas-1;i++)
+                for (var j=0; j<this.nroproc;j++)
+                    this.conexiones.push(new Conexion (this.etapas[i].getCrossbars()[Math.trunc(j/2)].getSalidas()[j%2],this.etapas[i+1].getEntradas()[j]));
             },
 
             multiplicar(){
