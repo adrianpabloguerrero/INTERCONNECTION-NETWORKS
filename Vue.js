@@ -245,8 +245,6 @@
                   k++;
                 }
               }
-
-//linea de prueba
             },
 
             multiplicar(){
