@@ -246,8 +246,6 @@
                 }
               }
 
-//linea de prueba 2
-//linea kitybranch
             },
 
             multiplicar(){
