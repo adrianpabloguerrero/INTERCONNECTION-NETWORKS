@@ -11,7 +11,7 @@ class Etapa {
 		this.calculador=calculador;
 		this.nroproc = nroproc;
 		for (var i=0; i<this.cantidad;i++)
-			this.crossbar.push(new Crossbar(i));
+			this.crossbar.push(new Crossbar("e" + this.id + "c"+i));
 		for (var i = 0; i< this.nroproc; i ++) {
 			this.entradas.push(new Puerto(this.getId() + "e" + i.toString(2)));
 			this.salidas.push(new Puerto(this.getId() + "s" + i.toString(2)));
@@ -42,6 +42,10 @@ class Etapa {
 
 	getConexiones(){
 		return this.conexiones;
+	}
+
+	getCrossbars() {
+		return this.crossbar;
 	}
 
 	getEntradas (){
