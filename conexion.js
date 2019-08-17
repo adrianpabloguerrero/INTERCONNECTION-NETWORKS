@@ -3,7 +3,16 @@ class Conexion {
   constructor (puertoEntrada,puertoSalida){
     this.puertoEntrada=puertoEntrada;
     this.puertoSalida=puertoSalida;
+    this.ocupada = true;
   }
+
+    getOcupada(){
+      return this.ocupada;
+    }
+
+    setOcupada (valor){
+      this.ocupada=valor;
+    }
 
    findAbsolutePosition(htmlElement) {
   var x = htmlElement.offsetLeft;
