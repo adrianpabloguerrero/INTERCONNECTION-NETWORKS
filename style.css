@@ -37,6 +37,11 @@ body {
   margin-top: 10px
 }
 
+.pasos{
+  font-family: 'Montserrat', sans-serif; position: relative;
+  margin-top: 5px
+}
+
 .simu {
 	background-color:red;
 	height: 500px;

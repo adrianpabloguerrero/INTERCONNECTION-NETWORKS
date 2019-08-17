@@ -216,7 +216,10 @@
             
             },
             potencia: function(){
-              this.nroproc = Math.pow(2,this.potencia);
+              if(this.potencia > 0)
+                this.nroproc = Math.pow(2,this.potencia);
+              else
+                  this.nroproc = 0;
           }
         },
       
@@ -282,7 +285,7 @@
             </div>
           <div class="imputs">
             <label for="potencia">Numero de procesadores:</label>
-            <input type="number" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
+            <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
             <label for="nroproc">Procesadores activos:</label>
             <input type="number" v-model= "nroprocactivos" placeholder="Multiplo de 2" step="2" min="0" style="width:100px"></input>
             <span>Periodicidad de los requerimientos</span>
@@ -297,7 +300,12 @@
             <option>Direcciones al azar</option>
             <option>Lista de direcciones</option>
             </select>
-          </div>          
+          </div> 
+          <div class ="pasos">
+            <label> Pasos de simulacion:</label>
+            <button v-on:click>Paso siguiente</button> 
+            <button v-on:click>Paso anterior</button>
+          </div>         
           <div class="container">
             <div class="row">
               <div class="my-col">      
