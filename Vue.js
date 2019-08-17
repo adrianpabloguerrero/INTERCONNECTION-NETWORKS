@@ -88,7 +88,13 @@
               this.calcularDestino();
               this.calcularDescription();
           }},
-          template: '<svg style="position:absolute;top:0;left:0;width:100%;height:100%" viewbox="0 0 100 100"><circle :cx="this.origenCirculoX" :cy="this.origenCirculoY" r="3" fill="red"/><path v-if="elemOrigen!=null" :d="this.description" stroke="red"> </path><circle :cx="this.destinoCirculoX" :cy="this.destinoCirculoY" r="3"  fill="red" /></svg>'
+          template: `<svg style="position:absolute;top:0;left:0;width:100%;height:100%" viewbox="0 0 100 100">
+                            <circle :cx="this.origenCirculoX" :cy="this.origenCirculoY" r="3" fill="red"/>
+                               <path v-if="(elemOrigen!=null && conexion.getOcupada())" :d="this.description" stroke="red"> </path>
+                               <path v-if="(elemOrigen!=null && !(conexion.getOcupada()))" :d="this.description" stroke="green"> </path>
+                               
+                            <circle :cx="this.destinoCirculoX" :cy="this.destinoCirculoY" r="3"  fill="red" />
+                    </svg>`
         })
 
          Vue.component ('procesador', {
