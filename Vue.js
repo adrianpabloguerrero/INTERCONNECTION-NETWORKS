@@ -181,6 +181,7 @@
           nroprocactivos: '',
           configuracion: '',
           procesadores: [],
+          potencia:'',
           etapas: [],
           memoria: null,
           conexiones:null,
@@ -211,8 +212,14 @@
               this.memoria = new Memoria(this.nroEtapas);
                 this.crearConexionesExternas();
           }
-        }
-      },
+
+            
+            },
+            potencia: function(){
+              this.nroproc = Math.pow(2,this.potencia);
+          }
+        },
+      
 
       updated: function(){
             //console.log("moooooun");
@@ -274,10 +281,10 @@
             <img class="image" v-bind:src="image" />  
             </div>
           <div class="imputs">
-            <label for="nroproc">Numero de procesadores:</label>
-            <input type="number" v-model= "nroproc" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
+            <label for="potencia">Numero de procesadores:</label>
+            <input type="number" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
             <label for="nroproc">Procesadores activos:</label>
-            <input type="number" v-model= "nroprocactivos" placeholder="multiplo de 2" step="2" min="0" style="width:100px"></input>
+            <input type="number" v-model= "nroprocactivos" placeholder="Multiplo de 2" step="2" min="0" style="width:100px"></input>
             <span>Periodicidad de los requerimientos</span>
             <select v-model="periodicidad">
             <option>Periodico</option>
