@@ -3,17 +3,27 @@ class Conexion {
   constructor (puertoEntrada,puertoSalida){
     this.puertoEntrada=puertoEntrada;
     this.puertoSalida=puertoSalida;
-    this.ocupada = true;
+    this.puertoEntrada.setConexionDestino(this);
+    this.puertoSalida.setConexionOrigen(this);
   }
 
+
+
     getOcupada(){
-      return this.ocupada;
+      return (this.puertoEntrada.getOcupado());
     }
 
-    setOcupada (valor){
-      this.ocupada=valor;
+   
+
+
+    traerMensaje (){
+        if (this.puertoEntrada.getOcupado()){
+          this.puertoSalida.setMensaje(this.puertoEntrada.getMensaje());
+          this.puertoEntrada.setMensaje(null);
+        }
     }
 
+    
    findAbsolutePosition(htmlElement) {
   var x = htmlElement.offsetLeft;
   var y = htmlElement.offsetTop;

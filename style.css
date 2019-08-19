@@ -21,7 +21,13 @@ body {
 }
 
 
+.conexionOcupada {
+  stroke: red;
+}
 
+.conexionLibre {
+  stroke: green;
+}
 
 .imputs{
 	font-family: 'Montserrat', sans-serif; position: relative;
@@ -167,10 +173,20 @@ body {
   padding: 0 !important;
 }
 
-.puerto {
+.puertoLibre{
   width: 100%px; 
   height: 10px; 
   background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+}
+
+.puertoOcupado {
+  width: 100%px; 
+  height: 10px; 
+  background-color: green;
   display: flex;
   justify-content: space-around;
   align-content: center;
