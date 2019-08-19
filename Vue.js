@@ -48,6 +48,7 @@
 
           methods: {
 
+
             calcularDescription (){
               this.description= " M " + this.origen + " L " + this.destino;
             },
@@ -129,8 +130,8 @@
         data: function(){
           return{
           }},
-          template: '<div class="memoria"> <slotMemoria v-for="(so,index) in memoria.slots" v-bind:slotMemoria=so v-bind:key="index"> </slotMemoria> </div>'
-        })
+          template: '<div class="memoria">  {{"Memoria"}} <slotMemoria v-for="(so,index) in memoria.slots" v-bind:slotMemoria=so v-bind:key="index"> </slotMemoria> </div>'
+                  })
 
 
 
@@ -275,6 +276,11 @@
                     this.conexiones.push(new Conexion (this.etapas[i].getCrossbars()[Math.trunc(j/2)].getSalidas()[j%2],this.etapas[i+1].getEntradas()[j]));
             },
 
+            suma (){
+              console.log('Hello');
+              this.conexiones[0].setOcupada(false);
+            },
+
             multiplicar(){
               this.contador = this.retornar(this.contador);  
             },
@@ -306,11 +312,6 @@
             <option>Direcciones al azar</option>
             <option>Lista de direcciones</option>
             </select>
-          </div> 
-          <div class ="pasos">
-            <label> Pasos de simulacion:</label>
-            <button v-on:click>Paso siguiente</button> 
-            <button v-on:click>Paso anterior</button>
           </div>         
           <div class="container">
             <div class="row">
@@ -325,6 +326,11 @@
               </div>
               <conexion v-if="procesadores!==null" v-for="(co,index) in conexiones" v-bind:conexion=co v-bind:key="index"> </conexion>
             </div>
+            <div class ="pasos">
+            <label> Pasos de simulacion:</label>
+            <button v-on:click="this.suma">Paso siguiente</button> 
+            <button v-on:click>Paso anterior</button>
+          </div> 
             
             <div>  
             </div>  
