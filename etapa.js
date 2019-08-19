@@ -27,6 +27,19 @@ class Etapa {
 	}
 
 
+	avanzar(){
+		this.crossbar.forEach(function(element) {
+  			element.avanzar();
+		});
+		this.conexiones.forEach(function(element) {
+  			element.traerMensaje();
+		});
+		for (var i = 0; i<this.entradas.length; i ++)
+			this.entradas[i].traerMensaje();
+
+
+	}
+
 	bin2dec(bin) {
     return parseInt(bin, 2).toString(10);
 	}
