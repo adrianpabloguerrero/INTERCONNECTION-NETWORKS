@@ -49,6 +49,17 @@ body {
   margin-top: 5px
 }
 
+.rowProcesadores{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+
 .simu {
 	background-color:red;
 	height: 500px;
@@ -77,14 +88,14 @@ body {
   flex-direction: column;
   justify-content: space-around;
   font-family: 'Montserrat', sans-serif; position: relative;
-  font-size: 5px;
+  font-size: 7px;
 }
 
 .crossbar {
   width: 50px; 
   height: 50px; 
   max-width: 100%;
-  background: #fff176;
+  background: #f0e68c;
   padding: : 30px 10px 10px 10px;
 }
 
@@ -95,8 +106,8 @@ body {
   border: 3px solid #555;
   text-align:center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 5px;
-  background-color: #ff80ab;
+  font-size: 8px;
+  background-color: #ffebcd;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -108,7 +119,7 @@ body {
   border: 3px solid #555;
   text-align:center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 5px;
+  font-size: 8px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -140,9 +151,9 @@ body {
   height: 30px; 
   background: #E1E1E1;
   text-align:center;
-  color:white;
+  color:black;
   font-family: 'Montserrat', sans-serif; position: relative;
-  font-size: 5px;
+  font-size: 8px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
