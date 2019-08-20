@@ -101,12 +101,16 @@
           }},
 
             
-          template: `<div :id="procesador.getDireccion()" class="procesador"> 
+          template:`<div class="rowProcesadores">
+                    <label for="Activado">Activar</label><input type="checkbox" id="activado">
+                    <div :id="procesador.getDireccion()" class="procesador"> 
                           <div> {{"Procesador " + procesador.getDireccion() }} </div>  
                           <div class="myrow">
                              <div class="col-11 nopadding"> </div>
                              <div class="col-1 list-puertos nopadding">  <puerto v-bind:puerto=procesador.puerto> </puerto>  </div>
                           </div> 
+                    </div>
+
                     </div>`
         });
 
