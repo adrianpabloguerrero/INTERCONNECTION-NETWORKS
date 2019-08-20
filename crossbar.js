@@ -28,6 +28,10 @@ class Crossbar {
 		return destino.substr(0,1);
 	}
 
+	getConflicto (){
+		return (this.entradas[0].getOcupado() && this.entradas[1].getOcupado());
+	}
+	
 	getOcupado  ()   {
      return (this.conexion!=null);
    }

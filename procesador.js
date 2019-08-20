@@ -12,6 +12,14 @@
     }
 
   }
+
+  setActivado (activado){
+    this.activado=activado;
+  }
+
+  getActivado(){
+    return this.activado;
+  }
 	getDireccion  ()   {
   	 var dir = this.id.toString(2);
   	 while (dir.length<this.espacioDeDirecciones)
