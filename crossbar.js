@@ -12,16 +12,20 @@ class Crossbar {
 	}
 
 	avanzar (){
-		//por el momento salen todas por arriba
 		for (var i=0; i<this.entradas.length;i++)
 			if (this.entradas[i].getOcupado()){
-				console.log("guacho");
-				this.conexion = new Conexion (this.entradas[i],this.salidas[0]);
+				this.conexion = new Conexion (this.entradas[i],this.salidas[this.calcularSalida(this.entradas[i].getMensaje())]);
 				this.conexion.traerMensaje();
 			}
 		for (var i=0; i<this.entradas.length;i++)
 			this.entradas[i].traerMensaje();
+	}
 
+
+	calcularSalida(mensaje){
+		var destino = mensaje.getDestino();
+		mensaje.setDestino(destino.substr(1,destino.length));
+		return destino.substr(0,1);
 	}
 
 	getOcupado  ()   {
