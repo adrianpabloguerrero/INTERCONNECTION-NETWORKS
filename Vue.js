@@ -6,7 +6,7 @@
           data: function() {
             return{
             }},
-            template: `<div class="row crossbar"> 
+            template: `<div class="row crossbar" :style="crossbar.getConflicto() ? { 'background-color': 'red' } : { 'background-color': 'yellow' }"> 
             <div class="col-1 list-puertos nopadding"> 
             <puerto  v-for="(po,index) in crossbar.entradas" v-bind:puerto=po v-bind:key="index">     </puerto>          
             </div>
@@ -191,9 +191,6 @@
             perfectShuffle:null,
             butterFlyZero:null,
           },
-
-
-
             
             
           watch: {
