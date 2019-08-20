@@ -102,8 +102,7 @@
 
             
           template:`<div class="rowProcesadores">
-                    <label for="Activado">Activar</label><input type="checkbox" id="activado">
-                    <div :id="procesador.getDireccion()" class="procesador"> 
+                    <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': 'red' } : {'background-color' : 'blue'}"> 
                           <div> {{"Procesador " + procesador.getDireccion() }} </div>  
                           <div class="myrow">
                              <div class="col-11 nopadding"> </div>
@@ -113,6 +112,18 @@
 
                     </div>`
         });
+
+        Vue.component ('inputsProcesadores', {
+          props: ['procesador'],
+         data: function() {
+          return {
+          }},
+
+          template:`<div>                   
+                      <label for="Activado">{{procesador.activado}}</label><input type="checkbox" id="activado" v-model="procesador.activado">
+                    </div>`            
+        });
+
 
         Vue.component ('slotMemoria', {
           props: ['slotMemoria'],
@@ -326,6 +337,7 @@
               <label> Pasos de simulacion:</label>
               <button v-on:click="this.avanzar">Paso siguiente</button> 
               <button v-on:click>Paso anterior</button>
+              <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores>
             </div> 
               
               <div>  

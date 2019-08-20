@@ -4,6 +4,7 @@
 		this.id=id;
 		this.espacioDeDirecciones = espacioDeDirecciones;
     this.puerto = new Puerto(this.getId() + "p");
+    this.activado = false;
 	}
 
   avanzar (){
