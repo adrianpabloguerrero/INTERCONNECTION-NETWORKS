@@ -6,7 +6,7 @@
             data: function() {
               return{
               }},
-              template: `<div class="row crossbar" :style="crossbar.getConflicto() ? { 'background-color': 'red' } : { 'background-color': 'yellow' }"> 
+              template: `<div class="row crossbar" :style="crossbar.getConflicto() ? { 'background-color': 'red' } : { 'background-color': '#f0e68c' }"> 
               <div class="col-1 list-puertos nopadding"> 
               <puerto  v-for="(po,index) in crossbar.entradas" v-bind:puerto=po v-bind:key="index">     </puerto>          
               </div>
@@ -121,8 +121,17 @@
 
             template:`<div>                   
                         <label for="Activado">Activar</label><input type="checkbox" id="activado" v-model="procesador.activado">
+                          <select>
+                          <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
+                          <option>Periodico</option>
+                          <option>Unica vez</option>
+                          <option>Al azar</option>
+                          </select>
                       </div>`            
           });
+
+
+
 
 
           Vue.component ('slotMemoria', {
@@ -316,14 +325,6 @@
         <div class="imputs">
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
-          <label for="nroproc">Procesadores activos:</label>
-          <input type="number" v-model= "nroprocactivos" placeholder="Multiplo de 2" step="2" min="0" style="width:100px"></input>
-          <span>Periodicidad de los requerimientos</span>
-          <select v-model="periodicidad">
-          <option>Periodico</option>
-          <option>Unica vez</option>
-          <option>Al azar</option>
-          </select>
           <span>Configuracion de direccion de memoria</span>
           <select v-model="configuracion">
           <option>Direccion unica</option>
@@ -334,7 +335,7 @@
         <div class="simulador">
           <div class="row" style="margin-left: 0px">
           <div class="list-inputs my-col nopadding">  
-          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores> 
+          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores>
           </div>
           </div>  
             <div class="container">
