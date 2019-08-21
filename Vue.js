@@ -120,7 +120,7 @@
             }},
 
             template:`<div>                   
-                        <label for="Activado">Activar</label><input type="checkbox" id="activado" v-model="procesador.activado">
+                        <label for="Activado">Activado</label><input type="checkbox" id="activado" v-model="procesador.activado">
                           <select>
                           <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
                           <option>Periodico</option>
