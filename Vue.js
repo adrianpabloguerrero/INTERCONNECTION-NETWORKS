@@ -104,7 +104,8 @@
 
             
           template:`<div class="rowProcesadores">
-                    <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': 'red' } : {'background-color' : 'blue'}"> 
+                    <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#0000ff',  'color':'white' } : {'background-color' : '#d3d3d3'}">
+                    
                           <div> {{"Procesador " + procesador.getDireccion() }} </div>  
                           <div class="myrow">
                              <div class="col-11 nopadding"> </div>
@@ -116,15 +117,15 @@
         });
 
         Vue.component ('inputsProcesadores', {
-          props: ['procesador'],
-         data: function() {
-          return {
-          }},
+            props: ['procesador'],
+           data: function() {
+            return {
+            }},
 
-          template:`<div>                   
-                      <label for="Activado">{{procesador.activado}}</label><input type="checkbox" id="activado" v-model="procesador.activado">
-                    </div>`            
-        });
+            template:`<div>                   
+                        <label for="Activado">Activar</label><input type="checkbox" id="activado" v-model="procesador.activado">
+                      </div>`            
+          });
 
 
         Vue.component ('slotMemoria', {
@@ -313,53 +314,56 @@
             },
 
             template: `
-            <div>
-              <div class="header"> 
-              {{message}}
-              <img class="image" v-bind:src="image" />  
-              </div>
-            <div class="imputs">
-              <label for="potencia">Numero de procesadores:</label>
-              <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
-              <label for="nroproc">Procesadores activos:</label>
-              <input type="number" v-model= "nroprocactivos" placeholder="Multiplo de 2" step="2" min="0" style="width:100px"></input>
-              <span>Periodicidad de los requerimientos</span>
-              <select v-model="periodicidad">
-              <option>Periodico</option>
-              <option>Unica vez</option>
-              <option>Al azar</option>
-              </select>
-              <span>Configuracion de direccion de memoria</span>
-              <select v-model="configuracion">
-              <option>Direccion unica</option>
-              <option>Direcciones al azar</option>
-              <option>Lista de direcciones</option>
-              </select>
-            </div>         
+        <div>
+        <div class="header"> 
+          {{message}}
+          <img class="image" v-bind:src="image" />  
+        </div>
+        <div class="imputs">
+          <label for="potencia">Numero de procesadores:</label>
+          <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
+          <label for="nroproc">Procesadores activos:</label>
+          <input type="number" v-model= "nroprocactivos" placeholder="Multiplo de 2" step="2" min="0" style="width:100px"></input>
+          <span>Periodicidad de los requerimientos</span>
+          <select v-model="periodicidad">
+          <option>Periodico</option>
+          <option>Unica vez</option>
+          <option>Al azar</option>
+          </select>
+          <span>Configuracion de direccion de memoria</span>
+          <select v-model="configuracion">
+          <option>Direccion unica</option>
+          <option>Direcciones al azar</option>
+          <option>Lista de direcciones</option>
+          </select>
+        </div> 
+        <div class="simulador">
+          <div class="row" style="margin-left: 0px">
+          <div class="list-inputs my-col nopadding">  
+          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores> 
+          </div>
+          </div>  
             <div class="container">
-              <div class="row">
-                <div class="my-col">      
-                  <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </procesador>
+                <div class="row">
+                    <div class="my-col">      
+                          <procesador v-for= "(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </procesador>
+                    </div>
+                    <div v-for= "(eo,index) in etapas" class="col my-col">
+                          <etapa v-bind:etapa=eo v-bind:key="index"> </etapa>
+                    </div>
+                    <div class="col my-col">
+                          <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
+                    </div>
+                    <conexion v-if="procesadores!==null" v-for="(co,index) in conexiones" v-bind:conexion=co v-bind:key="index"> </conexion>
                 </div>
-                <div v-for= "(eo,index) in etapas" class="col my-col">
-                  <etapa v-bind:etapa=eo v-bind:key="index"> </etapa>
-                </div>
-                <div class="col my-col">
-                  <memoria v-if="memoria!== null" v-bind:memoria=memoria></memoria>
-                </div>
-                <conexion v-if="procesadores!==null" v-for="(co,index) in conexiones" v-bind:conexion=co v-bind:key="index"> </conexion>
-              </div>
-              <div class ="pasos">
-              <label> Pasos de simulacion:</label>
-              <button id="avanzar" :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
-              <button v-on:click>Paso anterior</button>
-              <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores>
-            </div> 
-              
-              <div>  
-              </div>  
-            </div>
-          </div>`
+                <div class ="pasos">
+                    <label> Pasos de simulacion:</label>
+                    <button v-on:click="this.avanzar">Paso siguiente</button> 
+                    <button v-on:click>Paso anterior</button>
+                </div> 
+          </div> 
+        </div>
+</div>`
 
           });
 
