@@ -15,7 +15,7 @@
               <puerto  v-for="(po,index) in crossbar.salidas" v-bind:puerto=po v-bind:key="index">    </puerto>           
               </div>
               </div>`
-            })
+            }),
 
           Vue.component('conexion',{
             props:['conexion'],
