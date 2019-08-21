@@ -289,13 +289,15 @@
                       this.etapas[i].avanzar();
                      for (var i = this.procesadores.length-1; i>=0; i--)
                       this.procesadores[i].avanzar();
-                  } else
+                  } else{
                   console.log("hubo conflicto");
+                  document.getElementById("avanzar").disable=true;
+                }
               },
 
               hayConflicto(){
                 for (var i =0; i<this.nroEtapas; i++)
-                  for (var j = 0; j < this.etapas[i].getCrossbars().length-1; j++)
+                  for (var j = 0; j < this.etapas[i].getCrossbars().length; j++)
                     if (this.etapas[i].getCrossbars()[j].getConflicto())
                       return true;
                 return false;
@@ -349,7 +351,7 @@
               </div>
               <div class ="pasos">
               <label> Pasos de simulacion:</label>
-              <button v-on:click="this.avanzar">Paso siguiente</button> 
+              <button id="avanzar" :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
               <button v-on:click>Paso anterior</button>
               <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores>
             </div> 
