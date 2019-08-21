@@ -114,7 +114,7 @@
           });
 
           Vue.component ('inputsProcesadores', {
-            props: ['procesador'],
+            props: ['procesador','cantidad','list'],
            data: function() {
             return {
             }},
@@ -122,10 +122,14 @@
             template:`<div style="display: flex">                   
                         <label for="Activado">Activado</label><input type="checkbox" id="activado" v-model="procesador.activado">
                           <select>
-                          <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
-                          <option>Periodico</option>
-                          <option>Unica vez</option>
-                          <option>Al azar</option>
+                              <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
+                              <option>Periodico</option>
+                              <option>Unica vez</option>
+                              <option>Al azar</option>
+                          </select>
+                          <select>
+                              <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
+                              <option v-for="procesador in list" > {{procesador.getDireccion()}}</option>
                           </select>
                       </div>`            
           });
@@ -141,7 +145,7 @@
               }},
               template: `<div class="row slotMemoria"> 
                             <div class="col-1 list-puertos nopadding"> <puerto v-bind:puerto=slotMemoria.puerto> </puerto></div>
-                            <div class="col-11  nopadding"> {{slotMemoria.getId() + slotMemoria.getMensaje() }}  </div> 
+                            <div class="col-11  nopadding"> {{slotMemoria.getId() }}  </div> 
                          </div>`
             })
 
@@ -329,17 +333,11 @@
         <div class="imputs">
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
-          <span>Configuracion de direccion de memoria</span>
-          <select v-model="configuracion">
-          <option>Direccion unica</option>
-          <option>Direcciones al azar</option>
-          <option>Lista de direcciones</option>
-          </select>
         </div> 
         <div class="simulador">
           <div class="row" style="margin-left: 0px">
           <div class="list-inputs my-col nopadding">  
-          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:key="index"> </inputsProcesadores>
+          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:cantidad=nroproc v-bind:list=procesadores v-bind:key="index"> </inputsProcesadores>
           </div>
           </div>  
             <div class="container">
