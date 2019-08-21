@@ -299,6 +299,10 @@
                 return false;
               },
 
+                reset(){
+                  this.nroproc='';
+                },
+
                 multiplicar(){
                   this.contador = this.retornar(this.contador);  
                 },
@@ -353,7 +357,7 @@
                 <div class ="pasos">
                     <label> Pasos de simulacion:</label>
                     <button :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
-                    <button v-on:click>Paso anterior</button>
+                    <button :disabled="!hayConflicto()" v-on:click="this.reset">RESET</button>
                 </div> 
           </div> 
         </div>
