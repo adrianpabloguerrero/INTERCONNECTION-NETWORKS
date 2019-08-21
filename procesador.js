@@ -8,10 +8,11 @@
 	}
 
   avanzar (){
+    if (this.activado){
     if (Math.random()>0.8){
       this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2)));
+      }
     }
-
   }
 
   setActivado (activado){
