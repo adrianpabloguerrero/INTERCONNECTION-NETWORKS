@@ -281,12 +281,23 @@
                 },
 
                 avanzar (){
-                this.memoria.avanzar();
-                for (var i = this.etapas.length-1; i>=0; i--)
-                  this.etapas[i].avanzar();
-                 for (var i = this.procesadores.length-1; i>=0; i--)
-                  this.procesadores[i].avanzar();
+                 if (!this.hayConflicto()){
+                    this.memoria.avanzar();
+                    for (var i = this.etapas.length-1; i>=0; i--)
+                      this.etapas[i].avanzar();
+                     for (var i = this.procesadores.length-1; i>=0; i--)
+                      this.procesadores[i].avanzar();
+                  } else
+                  console.log("hubo conflicto");
                 },
+
+                hayConflicto(){
+                for (var i =0; i<this.nroEtapas; i++)
+                  for (var j = 0; j < this.etapas[i].getCrossbars().length; j++)
+                    if (this.etapas[i].getCrossbars()[j].getConflicto())
+                      return true;
+                return false;
+              },
 
                 multiplicar(){
                   this.contador = this.retornar(this.contador);  
@@ -341,7 +352,7 @@
                 </div>
                 <div class ="pasos">
                     <label> Pasos de simulacion:</label>
-                    <button v-on:click="this.avanzar">Paso siguiente</button> 
+                    <button :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
                     <button v-on:click>Paso anterior</button>
                 </div> 
           </div> 
