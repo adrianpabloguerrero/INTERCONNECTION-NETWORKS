@@ -119,7 +119,7 @@
             return {
             }},
 
-            template:`<div>                   
+            template:`<div style="display: flex">                   
                         <label for="Activado">Activado</label><input type="checkbox" id="activado" v-model="procesador.activado">
                           <select>
                           <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
