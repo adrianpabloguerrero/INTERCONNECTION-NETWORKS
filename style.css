@@ -29,22 +29,6 @@ body {
   stroke: green;
 }
 
-
-.list-inputs {
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-}
-
-.simulador{
-  display:flex;
-  flex-direction:row;
-
-}
-
 .imputs{
 	font-family: 'Montserrat', sans-serif; position: relative;
 	font-size: 12px;
@@ -97,14 +81,21 @@ body {
   width: 50px; 
   height: 50px; 
   border: 3px solid #555;
-  background: #428bca;
+  background-color: #428bca;
   margin: 30px 10px 10px 10px;
   text-align:center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-family: 'Montserrat', sans-serif; position: relative;
+  color:black;
   font-size: 7px;
+}
+
+.simulador{
+  display:flex;
+  flex-direction:row;
+
 }
 
 .crossbar {
@@ -176,6 +167,15 @@ body {
   align-items: center;
   justify-content: space-around;
  
+}
+
+.list-inputs {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
 }
 
 .list-cross {
