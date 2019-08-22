@@ -1,5 +1,9 @@
+        
+
         //comentarioCristian
         Vue.prototype.$eventBus = new Vue();
+
+
 
           Vue.component ('crossbar', {
             props: ['crossbar'],
@@ -121,16 +125,17 @@
 
             template:`<div style="display: flex">                   
                         <label for="Activado">Activado</label><input type="checkbox" id="activado" v-model="procesador.activado">
-                          <select>
+                          <select :disabled="!procesador.activado" v-model="procesador.periodicidad">
                               <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
                               <option>Periodico</option>
                               <option>Unica vez</option>
                               <option>Al azar</option>
                           </select>
-                          <select>
+                          <select :disabled="!procesador.activado">
                               <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
                               <option v-for="procesador in list" > {{procesador.getDireccion()}}</option>
                           </select>
+                         
                       </div>`            
           });
 
@@ -220,6 +225,7 @@
               butterFlyZero:null,
             },
               
+
               
             watch: {
               nroproc: function(){
@@ -357,6 +363,7 @@
                     <label> Pasos de simulacion:</label>
                     <button :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
                     <button :disabled="!hayConflicto()" v-on:click="this.reset">RESET</button>
+                  
                 </div> 
           </div> 
         </div>

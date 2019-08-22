@@ -5,14 +5,30 @@
 		this.espacioDeDirecciones = espacioDeDirecciones;
     this.puerto = new Puerto(this.getId() + "p");
     this.activado = false;
+    this.destinos= [];
+    this.periodicidad = 0;
+    this.pasos=0;
 	}
 
   avanzar (){
     if (this.activado){
-    if (Math.random()>0.8){
-      this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2)));
+      if (this.periodicidad == "Unica vez"){  
+           this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2))); 
+           this.activado=false; 
+      }
+       if (this.periodicidad == "Al azar"){
+          if (Math.random() > 0.5)  
+           this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2))); 
       }
     }
+  }
+
+  setPerioricidad (periodicidad){
+    this.periodicidad=periodicidad;
+  }
+
+  getPerioricidad(){
+    return this.periodicidad;
   }
 
   setActivado (activado){
