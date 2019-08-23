@@ -131,11 +131,12 @@
                               <option>Unica vez</option>
                               <option>Al azar</option>
                           </select>
+                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px"></input>
                           <select :disabled="!procesador.activado">
                               <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
                               <option v-for="procesador in list" > {{procesador.getDireccion()}}</option>
                           </select>
-                         
+
                       </div>`            
           });
 

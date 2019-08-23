@@ -8,6 +8,7 @@
     this.destinos= [];
     this.periodicidad = 0;
     this.pasos=0;
+    this.pasoActual = 1;
 	}
 
   avanzar (){
@@ -20,7 +21,18 @@
           if (Math.random() > 0.5)  
            this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2))); 
       }
+      if (this.periodicidad == "Periodico"){
+        if (this.pasoActual==this.pasos){
+            this.puerto.setMensaje(new Mensaje (1,"100"," Soy el procesador " + this.id.toString(2)));
+            this.pasoActual=1;
+          } else 
+          this.pasoActual++;
+        } 
     }
+  }
+
+  getEsPeriodico(){
+    return (this.periodicidad=="Periodico");
   }
 
   setPerioricidad (periodicidad){
