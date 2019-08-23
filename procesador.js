@@ -9,6 +9,10 @@
     this.periodicidad = 0;
     this.pasos=0;
     this.pasoActual = 1;
+    this.destinosPosibles = [];
+    this.proximaDireccion = 0;
+    for (var i=0; i<Math.pow(2,espacioDeDirecciones); i++)
+      this.destinosPosibles.push(this.formatearDireccion(i));
 	}
 
   avanzar (){
@@ -29,6 +33,18 @@
           this.pasoActual++;
         } 
     }
+  }
+
+
+  getProximaDireccion(){
+    return this.proximaDireccion;
+  }
+  
+  getDestinos(){
+    return this.destinos;
+  }
+  getDestinosPosibles(){
+    return this.destinosPosibles;
   }
 
   getEsPeriodico(){
@@ -56,6 +72,14 @@
     	 dir = '0'+dir;
      return dir;
    }
+
+   formatearDireccion (n) {
+     var dir = n.toString(2);
+     while (dir.length<this.espacioDeDirecciones)
+       dir = '0'+dir;
+     return dir;
+   }
+
 
    getId   () {
    	return this.id;
