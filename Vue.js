@@ -98,16 +98,20 @@
                         </svg>`
             })
 
-             Vue.component ('procesador', {
+            Vue.component ('procesador', {
            props: ['procesador'],
            data: function() {
             return {
             }},
 
+
+           
               
             template:`<div class="rowProcesadores">
+                 <inputsProcesadores v-bind:procesador=procesador style="z-index:20;"> </inputsProcesadores>
                       <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#0000ff',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
-                            <div> {{"Procesador " + procesador.getDireccion() }} </div>  
+                            <div> {{"Procesador " + procesador.getDireccion()  }} </div> 
+                            <div> {{"Destinos " + procesador.getDestinos()  }} </div>   
                             <div class="myrow">
                                <div class="col-11 nopadding"> </div>
                                <div class="col-1 list-puertos nopadding">  <puerto v-bind:puerto=procesador.puerto> </puerto>  </div>
@@ -115,26 +119,45 @@
                       </div>
 
                       </div>`
+            
           });
 
           Vue.component ('inputsProcesadores', {
-            props: ['procesador','cantidad','list'],
+            props: ['procesador'],
            data: function() {
             return {
             }},
 
+
+           
+            methods: {
+
+            setModel: function (e) {
+                this.procesador.getDestinos().push(this.procesador.getProximaDireccion());
+                
+            },  
+
+            getDireccion (n,espacioDeDirecciones)   {
+             var dir = n.toString(2);
+             while (dir.length<espacioDeDirecciones)
+               dir = '0'+dir;
+             return dir;
+            }
+
+          },
+
             template:`<div style="display: flex">                   
-                        <label for="Activado">Activado</label><input type="checkbox" id="activado" v-model="procesador.activado">
-                          <select :disabled="!procesador.activado" v-model="procesador.periodicidad">
+                        <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 5px;" id="activado" v-model="procesador.activado">
+                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 5px;">
                               <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
                               <option>Periodico</option>
                               <option>Unica vez</option>
                               <option>Al azar</option>
                           </select>
-                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px"></input>
-                          <select :disabled="!procesador.activado">
+                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px; margin: 10px;"></input>
+                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px;">
                               <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
-                              <option v-for="procesador in list" > {{procesador.getDireccion()}}</option>
+                              <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
                           </select>
 
                       </div>`            
@@ -331,6 +354,9 @@
                 }
               },
 
+
+
+
               template: `
 <div>
         <div class="header"> 
@@ -341,12 +367,6 @@
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
         </div> 
-        <div class="simulador">
-          <div class="row" style="margin-left: 0px">
-          <div class="list-inputs my-col nopadding">  
-          <inputsProcesadores v-for="(po,index) in procesadores" v-bind:procesador=po v-bind:cantidad=nroproc v-bind:list=procesadores v-bind:key="index"> </inputsProcesadores>
-          </div>
-          </div>  
             <div class="container">
                 <div class="row">
                     <div class="my-col">      
@@ -362,12 +382,12 @@
                 </div>
                 <div class ="pasos">
                     <label> Pasos de simulacion:</label>
-                    <button :disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
-                    <button :disabled="!hayConflicto()" v-on:click="this.reset">RESET</button>
-                  
+                    <button type="button" class="btn btn-primary btn-lg btn-block":disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
+                    <button type="button" class="btn btn-primary btn-lg btn-block":disabled="!hayConflicto()" v-on:click="this.reset">RESET</button>
                 </div> 
+              
           </div> 
-        </div>
+        
 </div>`
 //chequeo 2
             });
