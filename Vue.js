@@ -111,7 +111,7 @@
                  <inputsProcesadores v-bind:procesador=procesador style="z-index:20;"> </inputsProcesadores>
                       <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#0000ff',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
                             <div> {{"Procesador " + procesador.getDireccion()  }} </div> 
-                            <div> {{"Destinos " + procesador.getDestinos()  }} </div>   
+                            <div> {{" Destinos: " + procesador.getDestinos()  }} </div>   
                             <div class="myrow">
                                <div class="col-11 nopadding"> </div>
                                <div class="col-1 list-puertos nopadding">  <puerto v-bind:puerto=procesador.puerto> </puerto>  </div>
@@ -146,15 +146,15 @@
 
           },
 
-            template:`<div style="display: flex">                   
-                        <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 5px;" id="activado" v-model="procesador.activado">
-                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 5px;">
+            template:`<div style="display: flex; align-items:center;">                   
+                        <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 3px;" id="activado" v-model="procesador.activado">
+                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 3px;">
                               <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
                               <option>Periodico</option>
                               <option>Unica vez</option>
                               <option>Al azar</option>
                           </select>
-                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px; margin: 10px;"></input>
+                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px; margin: 3px;"></input>
                           <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px;">
                               <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
                               <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
@@ -235,7 +235,7 @@
             el: '#app',
             data: {
               message: 'Simulador de redes de interconexion',
-              image: 'logo.jpeg',
+              image: 'logo.png',
               nroproc: 0,
               periodicidad: '',
               nroprocactivos: '',
@@ -363,10 +363,10 @@
           {{message}}
           <img class="image" v-bind:src="image" />  
         </div>
-        <div class="imputs">
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
-        </div> 
+        </nav> 
             <div class="container">
                 <div class="row">
                     <div class="my-col">      
