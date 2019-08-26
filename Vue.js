@@ -242,7 +242,7 @@
               configuracion: '',
               procesadores: [],
               potencia:'',
-              tipo: '',
+              tipo: 'Omega',
               etapas: [],
               memoria: null,
               conexiones:null,
@@ -399,7 +399,7 @@
                 <div class ="pasos">
                     <label> Pasos de simulacion:</label>
                     <button type="button" class="btn btn-primary btn-lg btn-block":disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
-                    <button type="button" class="btn btn-primary btn-lg btn-block":disabled="!hayConflicto()" v-on:click="this.reset">RESET</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block"  v-on:click="this.reset">RESET</button>
                 </div> 
               
           </div> 
