@@ -20,17 +20,17 @@
     if (this.activado){
 
       if (this.periodicidad == "Unica vez"){  
-           this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista]," Soy el procesador " + this.id.toString(2))); 
+           this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista],"Msj procesador " + this.id.toString(2))); 
             if (this.posicionLista == this.destinos.length-1)
                 this.activado=false; 
       }
        if (this.periodicidad == "Al azar"){
           if (Math.random() > 0.5)  
-           this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista]," Soy el procesador " + this.id.toString(2))); 
+           this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista],"Msj procesador " + this.id.toString(2))); 
       }
       if (this.periodicidad == "Periodico"){
         if (this.pasoActual==this.pasos){
-            this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista]," Soy el procesador " + this.id.toString(2)));
+            this.puerto.setMensaje(new Mensaje (1,this.destinos[this.posicionLista],"Msj procesador " + this.id.toString(2)));
             this.pasoActual=1;
           } else 
           this.pasoActual++;

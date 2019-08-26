@@ -48,7 +48,7 @@
                 window.removeEventListener('resize',this.cambioTamano);
               },
               
-            
+  
 
               methods: {
 
@@ -103,13 +103,11 @@
            data: function() {
             return {
             }},
-
-
            
               
             template:`<div class="rowProcesadores">
                  <inputsProcesadores v-bind:procesador=procesador style="z-index:20;"> </inputsProcesadores>
-                      <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#0000ff',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
+                      <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#6BBA12',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
                             <div> {{"Procesador " + procesador.getDireccion()  }} </div> 
                             <div> {{" Destinos: " + procesador.getDestinos()  }} </div>   
                             <div class="myrow">
@@ -172,9 +170,11 @@
             data: function(){
               return{
               }},
-              template: `<div class="row slotMemoria"> 
+              template: `<div class="row slotMemoria" :style="slotMemoria.getPuerto().getOcupado() ? { 'background-color': '#6BBA12',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
                             <div class="col-1 list-puertos nopadding"> <puerto v-bind:puerto=slotMemoria.puerto> </puerto></div>
-                            <div class="col-11  nopadding"> {{slotMemoria.getId() }}  </div> 
+                            <div class="col-3  nopadding"> {{slotMemoria.getId()}}</div> 
+                            <div class="col-8" v-if="slotMemoria.getPuerto().getMensaje()== null">  </div>
+                            <div class="col-8" v-if="slotMemoria.getPuerto().getMensaje()!= null"> {{slotMemoria.getPuerto().getMensaje().getContenido()}}</div>
                          </div>`
             })
 
@@ -242,6 +242,7 @@
               configuracion: '',
               procesadores: [],
               potencia:'',
+              tipo: '',
               etapas: [],
               memoria: null,
               conexiones:null,
@@ -363,9 +364,24 @@
           {{message}}
           <img class="image" v-bind:src="image" />  
         </div>
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar nav-pills nav-fill" style="background-color: #e3f2fd;">
+         <div class="nav-item nav-link"> 
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
+        </div>
+        <div class="nav-item nav-link " style="display:flex; flex-direction:row; vertical-align: center; align-items:center"> 
+          <label>Tipo:  </label>
+          <select class="custom-select" v-model="tipo">
+                  <option>Omega</option>
+                  <option>Baseline</option>
+          </select>
+        </div>
+         <div class="nav-item nav-link" >
+          <label> Informacion </label>
+        </div>
+        <div class="nav-item nav-link" >
+          <label> Link a la catedra </label>
+        </div>
         </nav> 
             <div class="container">
                 <div class="row">
