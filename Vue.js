@@ -197,6 +197,14 @@
               mounted: function () {
                 this.$nextTick(function () {  
                     this.$eventBus.$emit('send-data', "montado");
+                   
+                })
+              },
+
+              updated: function () {
+                this.$nextTick(function () {  
+                    this.$eventBus.$emit('send-data', "montado");
+                 
                 })
               },
 
@@ -254,26 +262,17 @@
               
             watch: {
               nroproc: function(){
-                this.procesadores=[];
-                this.etapas=[];
-                this.memoria=null;
-                this.conexiones=null;
-                if (this.nroproc>0){
-                  this.conexiones = [];
-                  for (var i = 0; i < this.nroproc; i++)
-                    this.procesadores.push(new Procesador(i,this.nroEtapas));
-                  for (var i = 0; i < this.nroEtapas; i++){
-                      this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
-                   
-                  }
-                  this.memoria = new Memoria(this.nroEtapas);
-                    this.crearConexionesExternas();
-              }
-
+               this.inicializar();
               
 
-
                 },
+
+                tipo:function(){
+
+                  this.inicializar();
+                },
+
+
                 potencia: function(){
                   if(this.potencia > 0)
                     this.nroproc = Math.pow(2,this.potencia);
@@ -297,6 +296,30 @@
               },
 
               methods: {
+
+                inicializar () {
+                this.procesadores=[];
+                this.etapas=[];
+                this.memoria=null;
+                this.conexiones=null;
+                if (this.nroproc>0){
+                  this.conexiones = [];
+                  for (var i = 0; i < this.nroproc; i++)
+                    this.procesadores.push(new Procesador(i,this.nroEtapas));
+                  for (var i = 0; i < this.nroEtapas; i++){
+                      if (this.tipo == "Omega"){
+                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
+                       }
+                      if (this.tipo == "Baseline"){
+                        if (i==0)
+                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
+                       else 
+                        this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(this.nroEtapas-i,this.potencia)));
+                       }
+                  }
+                  this.memoria = new Memoria(this.nroEtapas);
+                    this.crearConexionesExternas();
+                }},
                
                 crearConexionesExternas (){
                   for (var i = 0; i<this.nroproc; i++){
