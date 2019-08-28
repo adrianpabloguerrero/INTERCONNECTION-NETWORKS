@@ -153,8 +153,8 @@
                               <option>Al azar</option>
                           </select>
                           <input  :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:50px; margin: 3px;"></input>
-                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px; width:50px;">
-                              <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
+                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px; width:80px;">
+                              <option disabled value="">Direcciones de memoria</option>
                               <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
                           </select>
 
