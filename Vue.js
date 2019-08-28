@@ -10,11 +10,11 @@
             data: function() {
               return{
               }},
-              template: `<div class="row crossbar" :style="crossbar.getConflicto() ? { 'background-color': 'red' } : { 'background-color': '#f0e68c' }"> 
+              template: `<div class="row crossbar" :style="crossbar.getConflicto() ? { 'background-color': 'red' } : crossbar.buffer.length==0 ? { 'background-color': '#f0e68c' } : { 'background-color': '#F8A842' } "> 
               <div class="col-1 list-puertos nopadding"> 
               <puerto  v-for="(po,index) in crossbar.entradas" v-bind:puerto=po v-bind:key="index">     </puerto>          
               </div>
-              <div class="col-10  nopadding " style= "display:flex; align-items:center; flex-direction:column; justify-content: space-around;"> <div> {{"Buffer: "}}  </div> <div> {{crossbar.buffer.length}} </div></div>
+              <div class="col-10  nopadding" style = "text-align:center; display: flex; flex-direction: column; justify-content: space-around; font-family: 'Montserrat', sans-serif; position: relative; color:black; font-size: 7px;"> {{ "Buffer: " + crossbar.buffer.length}} </div>
               <div class="col-1 list-puertos nopadding"> 
               <puerto  v-for="(po,index) in crossbar.salidas" v-bind:puerto=po v-bind:key="index">    </puerto>           
               </div>
@@ -146,14 +146,14 @@
 
             template:`<div style="display: flex; align-items:center;">                   
                         <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 3px;" id="activado" v-model="procesador.activado">
-                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 3px;">
-                              <option value="" disabled selected hidden style= "background-color: gray">Periodicidad </option> 
+                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 2px; width:75px;">
+                              
                               <option>Periodico</option>
                               <option>Unica vez</option>
                               <option>Al azar</option>
                           </select>
-                          <input :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:100px; margin: 3px;"></input>
-                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px;">
+                          <input  :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:50px; margin: 3px;"></input>
+                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px; width:50px;">
                               <option value="" disabled selected hidden style= "background-color: gray">Direccion Memoria </option> 
                               <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
                           </select>
