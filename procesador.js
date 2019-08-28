@@ -6,7 +6,7 @@
     this.puerto = new Puerto(this.getId() + "p");
     this.activado = false;
     this.destinos= [];
-    this.periodicidad = 0;
+    this.periodicidad = "Unica vez";
     this.pasos=0;
     this.pasoActual = 1;
     this.destinosPosibles = [];
@@ -36,14 +36,11 @@
           this.pasoActual++;
         } 
 
-console.log (this.destinos.length);
-
       if (this.posicionLista < this.destinos.length-1)
         this.posicionLista ++;
       else 
         this.posicionLista = 0;
       }
-
 
   }
 
