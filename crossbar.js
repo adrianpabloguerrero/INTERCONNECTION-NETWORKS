@@ -1,6 +1,6 @@
 class Crossbar {
 
-	constructor (id){
+	constructor (id,longBuffer){
 		this.id=id;
 		this.entradas=[];
 		this.salidas=[];
@@ -9,6 +9,8 @@ class Crossbar {
 			this.entradas.push(new Puerto(this.getId() + "ec" + i.toString(2)));
 			this.salidas.push(new Puerto(this.getId() + "sc" + i.toString(2)));
 		}
+		this.buffer=[];
+		this.longBuffer= longBuffer;
 	}
 
 	avanzar (){
@@ -21,6 +23,9 @@ class Crossbar {
 			this.entradas[i].traerMensaje();
 	}
 
+	getBuffer (){
+		return this.buffer;
+	}
 
 	calcularSalida(mensaje){
 		var destino = mensaje.getDestino();

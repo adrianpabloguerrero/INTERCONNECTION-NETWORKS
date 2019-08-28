@@ -14,7 +14,7 @@
               <div class="col-1 list-puertos nopadding"> 
               <puerto  v-for="(po,index) in crossbar.entradas" v-bind:puerto=po v-bind:key="index">     </puerto>          
               </div>
-              <div class="col-10  nopadding"> </div>
+              <div class="col-10  nopadding " style= "display:flex; align-items:center; flex-direction:column; justify-content: space-around;"> <div> {{"Buffer: "}}  </div> <div> {{crossbar.buffer.length}} </div></div>
               <div class="col-1 list-puertos nopadding"> 
               <puerto  v-for="(po,index) in crossbar.salidas" v-bind:puerto=po v-bind:key="index">    </puerto>           
               </div>
@@ -245,6 +245,7 @@
               message: 'Simulador de redes de interconexion',
               image: 'logo.png',
               nroproc: 0,
+              longBuffer: 0,
               periodicidad: '',
               nroprocactivos: '',
               configuracion: '',
@@ -391,6 +392,10 @@
          <div class="nav-item nav-link"> 
           <label for="potencia">Numero de procesadores:</label>
           <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
+        </div>
+        <div class="nav-item nav-link"> 
+          <label for="longBuffer">Tama&ntilde;o del buffer</label>
+          <input type="text" v-model= "longBuffer" min="0" style="width:100px"></input>
         </div>
         <div class="nav-item nav-link " style="display:flex; flex-direction:row; vertical-align: center; align-items:center"> 
           <label>Tipo:  </label>
