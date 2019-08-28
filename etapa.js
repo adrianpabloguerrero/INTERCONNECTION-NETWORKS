@@ -1,7 +1,7 @@
 
 class Etapa {
 
-	constructor (id,nroEtapas,nroproc,calculador){
+	constructor (id,nroEtapas,nroproc,calculador,longBuffer){
 		this.id=id;
 		this.crossbar = [];
 		this.cantidad = this.getCantidad(nroEtapas);
@@ -10,8 +10,9 @@ class Etapa {
 		this.conexiones=[];
 		this.calculador=calculador;
 		this.nroproc = nroproc;
+		this.longBuffer = longBuffer;
 		for (var i=0; i<this.cantidad;i++)
-			this.crossbar.push(new Crossbar("e" + this.id + "c"+i));
+			this.crossbar.push(new Crossbar("e" + this.id + "c"+i,this.longBuffer));
 		for (var i = 0; i< this.nroproc; i ++) {
 			this.entradas.push(new Puerto(this.getId() + "e" + i.toString(2)));
 			this.salidas.push(new Puerto(this.getId() + "s" + i.toString(2)));

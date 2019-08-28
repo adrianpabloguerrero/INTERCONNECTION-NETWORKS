@@ -273,6 +273,10 @@
                   this.inicializar();
                 },
 
+                longBuffer:function(){
+                  this.inicializar();
+                },
+
 
                 potencia: function(){
                   if(this.potencia > 0)
@@ -309,13 +313,13 @@
                     this.procesadores.push(new Procesador(i,this.nroEtapas));
                   for (var i = 0; i < this.nroEtapas; i++){
                       if (this.tipo == "Omega"){
-                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
+                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2),this.longBuffer));
                        }
                       if (this.tipo == "Baseline"){
                         if (i==0)
-                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2)));
+                         this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2),this.longBuffer));
                        else 
-                        this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(this.nroEtapas-i,this.potencia)));
+                        this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(this.nroEtapas-i,this.potencia),this.longBuffer));
                        }
                   }
                   this.memoria = new Memoria(this.nroEtapas);
