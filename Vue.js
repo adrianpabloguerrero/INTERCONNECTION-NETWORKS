@@ -108,8 +108,9 @@
             template:`<div class="rowProcesadores">
                  <inputsProcesadores v-bind:procesador=procesador style="z-index:20;"> </inputsProcesadores>
                       <div :id="procesador.getDireccion()" class="procesador" :style="procesador.getActivado() ? { 'background-color': '#6BBA12',  'color':'white' } : {'background-color' : '#d3d3d3'}"> 
-                            <div> {{"Procesador " + procesador.getDireccion()  }} </div> 
-                            <div> {{" Destinos: " + procesador.getDestinos()  }} </div>   
+                            <div style="margin:auto">
+                            <div> {{"Procesador " + procesador.getDireccion()  }} </div>    
+                            </div>
                             <div class="myrow">
                                <div class="col-11 nopadding"> </div>
                                <div class="col-1 list-puertos nopadding">  <puerto v-bind:puerto=procesador.puerto> </puerto>  </div>
@@ -144,20 +145,25 @@
 
           },
 
-            template:`<div style="display: flex; align-items:center;">                   
-                        <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 3px;" id="activado" v-model="procesador.activado">
-                        <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 2px; width:75px;">
-                              
-                              <option>Periodico</option>
-                              <option>Unica vez</option>
-                              <option>Al azar</option>
-                          </select>
-                          <input  :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:50px; margin: 3px;"></input>
-                          <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px; width:80px;">
-                              <option disabled value="">Direcciones de memoria</option>
-                              <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
-                          </select>
-
+            template:`<div style="display: flex; flex-direction:column; margin-top:20px; margin-right:10px"> 
+                        <div class="row" >  
+                        <div style="display: flex; align-items:center; justify-content:center">                
+                          <label for="Activado">Activado</label><input type="checkbox"aria-label="Checkbox for following text input" style ="margin: 3px;" id="activado" v-model="procesador.activado">
+                          <select class="custom-select" :disabled="!procesador.activado" v-model="procesador.periodicidad" style ="margin: 2px; width:75px;">
+                                <option>Periodico</option>
+                                <option>Unica vez</option>
+                                <option>Al azar</option>
+                            </select>
+                            <input  :disabled="!procesador.getEsPeriodico()" type="text" v-model= "procesador.pasos" placeholder="Pasos" min="0" style="width:50px; margin: 3px;"></input>
+                            <select :disabled="!procesador.activado" v-model="procesador.proximaDireccion" v-on:change="setModel" style ="margin: 5px; width:80px;">
+                                <option disabled value="">Direcciones de memoria</option>
+                                <option  v-for="direccion in procesador.destinosPosibles"> {{direccion}}</option>
+                            </select>
+                        </div>    
+                        </div>
+                        <div class="row">
+                          <div style="display: flex; align-items:center; justify-content:left"> {{" Destinos: " + procesador.getDestinos()  }} </div>
+                        </div>
                       </div>`            
           });
 
@@ -174,7 +180,7 @@
                             <div class="col-1 list-puertos nopadding"> <puerto v-bind:puerto=slotMemoria.puerto> </puerto></div>
                             <div class="col-3  nopadding"> {{slotMemoria.getId()}}</div> 
                             <div class="col-8" v-if="slotMemoria.getPuerto().getMensaje()== null">  </div>
-                            <div class="col-8" v-if="slotMemoria.getPuerto().getMensaje()!= null"> {{slotMemoria.getPuerto().getMensaje().getContenido()}}</div>
+                            <div class="col-8" v-if="slotMemoria.getPuerto().getMensaje()!= null" style=" height: 30px; width:100%; text-align:center; display: flex; flex-direction: column; justify-content: space-around; padding-left: 0px; padding-right: 0px;"> {{slotMemoria.getPuerto().getMensaje().getContenido()}}</div>
                          </div>`
             })
 
@@ -393,12 +399,12 @@
           <img class="image" v-bind:src="image" />  
         </div>
         <nav class="navbar nav-pills nav-fill" style="background-color: #e3f2fd;">
-         <div class="nav-item nav-link"> 
-          <label for="potencia">Numero de procesadores:</label>
-          <input type="text" v-model= "potencia" placeholder="Potencia de 2" min="0" style="width:100px"></input>
+         <div class="nav-item"> 
+          <label for="potencia">Numero de procesadores: 2^ </label>
+          <input type="text" v-model= "potencia" placeholder="Exponente" min="0" style="width:100px"></input>
         </div>
         <div class="nav-item nav-link"> 
-          <label for="longBuffer">Tama&ntilde;o del buffer</label>
+          <label for="longBuffer">Tama&ntilde;o del buffer: </label>
           <input type="text" v-model= "longBuffer" min="0" style="width:100px"></input>
         </div>
         <div class="nav-item nav-link " style="display:flex; flex-direction:row; vertical-align: center; align-items:center"> 
@@ -408,11 +414,11 @@
                   <option>Baseline</option>
           </select>
         </div>
-         <div class="nav-item nav-link" >
-          <label> Informacion </label>
+         <div class="nav-item">
+          <a href="informe.pdf"  target=»_blank» > Informaci&#243;n </a>
         </div>
-        <div class="nav-item nav-link" >
-          <label> Link a la catedra </label>
+        <div class="nav-item">
+          <a  href="http://arqui2.alumnos.exa.unicen.edu.ar/"  target=»_blank»> C&#225;tedra </a>
         </div>
         </nav> 
             <div class="container">
@@ -429,9 +435,9 @@
                     <conexion v-if="procesadores!==null" v-for="(co,index) in conexiones" v-bind:conexion=co v-bind:key="index"> </conexion>
                 </div>
                 <div class ="pasos">
-                    <label> Pasos de simulacion:</label>
+                    <label> Pasos de simulaci&#243;n:</label>
                     <button type="button" class="btn btn-primary btn-lg btn-block":disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
-                    <button type="button" class="btn btn-primary btn-lg btn-block"  v-on:click="this.reset">RESET</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block"  v-on:click="this.reset">Reset</button>
                 </div> 
               
           </div> 
