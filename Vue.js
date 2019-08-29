@@ -248,7 +248,7 @@
           var app = new Vue({
             el: '#app',
             data: {
-              message: 'Simulador de redes de interconexion',
+              message: "Simulador de redes de interconexion",
               image: 'logo.png',
               nroproc: 0,
               longBuffer: 0,
@@ -395,7 +395,7 @@
               template: `
 <div>
         <div class="header"> 
-          {{message}}
+          Simulador de redes de interconexi&#243;n
           <img class="image" v-bind:src="image" />  
         </div>
         <nav class="navbar nav-pills nav-fill" style="background-color: #e3f2fd;">
