@@ -1,4 +1,4 @@
-class ButterflyZero {
+class Baseline {
 	
 	constructor (nroEtapa,espacioDeDirecciones) {
 		this.nroEtapa = nroEtapa;
