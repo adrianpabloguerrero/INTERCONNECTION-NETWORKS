@@ -262,7 +262,7 @@
               memoria: null,
               conexiones:null,
               perfectShuffle:null,
-              butterFlyZero:null,
+              baseline:null,
             },
               
 
@@ -325,7 +325,7 @@
                         if (i==0)
                          this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new PerfectShuffle(2),this.longBuffer));
                        else 
-                        this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new ButterflyZero(this.nroEtapas-i,this.potencia),this.longBuffer));
+                        this.etapas.push(new Etapa(i,this.nroEtapas,this.nroproc,new Baseline(this.nroEtapas-i,this.potencia),this.longBuffer));
                        }
                   }
                   this.memoria = new Memoria(this.nroEtapas);
