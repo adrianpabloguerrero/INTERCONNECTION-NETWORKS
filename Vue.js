@@ -436,7 +436,7 @@
                 </div>
                 <div class ="pasos">
                     <label> Pasos de simulaci&#243;n:</label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block":disabled="hayConflicto()" v-on:click="this.avanzar">Paso siguiente</button> 
+                    <button type="button" class="btn btn-primary btn-lg btn-block":disabled="hayConflicto() || this.nroproc==0" v-on:click="this.avanzar">Paso siguiente</button> 
                     <button type="button" class="btn btn-primary btn-lg btn-block"  v-on:click="this.reset">Reset</button>
                 </div> 
               

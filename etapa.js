@@ -37,7 +37,7 @@ class Etapa {
 		});
 		for (var i = 0; i<this.entradas.length; i ++)
 			this.entradas[i].traerMensaje();
-
+		//console.log("avanzo etapa: " + this.id);
 
 	}
 
