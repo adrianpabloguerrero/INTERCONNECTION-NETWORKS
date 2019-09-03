@@ -415,7 +415,7 @@
           </select>
         </div>
          <div class="nav-item">
-          <a href="informe.pdf"  target=»_blank» > Informaci&#243;n </a>
+          <a href="Informe.pdf"  target=»_blank» > Informaci&#243;n </a>
         </div>
         <div class="nav-item">
           <a  href="http://arqui2.alumnos.exa.unicen.edu.ar/"  target=»_blank»> C&#225;tedra </a>
