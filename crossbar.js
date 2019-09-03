@@ -19,7 +19,6 @@ class Crossbar {
 		if (this.buffer.length > 0){
 			this.puertoBuffer.setMensaje(this.buffer[0]);
 			this.buffer.shift();
-
 			this.conexion = new Conexion (this.puertoBuffer,this.salidas[this.calcularSalida(this.puertoBuffer.getMensaje())]);
 			this.conexion.traerMensaje();
 			for (var i=0; i<this.entradas.length;i++)
@@ -39,7 +38,6 @@ class Crossbar {
 				//deberia haber solo uno ocupado y el buffer vacio
 				for (var i=0; i<this.entradas.length;i++) {
 					if (this.entradas[i].getOcupado()) {
-						console.log("Mensaje " + this.entradas[i].getMensaje().getContenido());
 						this.conexion = new Conexion (this.entradas[i],this.salidas[this.calcularSalida(this.entradas[i].getMensaje())]);
 						this.conexion.traerMensaje();
 					}
