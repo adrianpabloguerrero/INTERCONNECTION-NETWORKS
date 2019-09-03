@@ -40,10 +40,6 @@ class Baseline {
             this.salida.push(this.arreglo[j-1]);
 
         
-
-
-		console.log ("Input: " + this.arreglo);
-		console.log ("Output: " + this.salida.join(""));
 		
 		//this.output = this.arreglo;
 		//this.output[this.arreglo.length-1-this.nroEtapa] =  
